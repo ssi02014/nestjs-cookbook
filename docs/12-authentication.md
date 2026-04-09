@@ -1917,7 +1917,7 @@ curl -X POST http://localhost:3000/posts \
 
 ---
 
-## 전체 정리
+## 정리
 
 ### 이 챕터에서 한 것
 

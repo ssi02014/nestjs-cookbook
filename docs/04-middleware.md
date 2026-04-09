@@ -818,7 +818,7 @@ export class AuthCheckMiddleware implements NestMiddleware {
 
 ---
 
-## 핵심 정리
+## 정리
 
 | 개념 | 설명 |
 |------|------|
@@ -832,12 +832,6 @@ export class AuthCheckMiddleware implements NestMiddleware {
 | **글로벌 적용** | `app.use()` (함수형만) 또는 `forRoutes('*')` (클래스도 가능) |
 | **체이닝** | `apply(A, B, C)` 순서로 실행됨 |
 
-> **다음 챕터 예고**: 챕터 5에서는 **Pipe**를 배운다. 클라이언트가 보낸 데이터를 변환하고 유효성을 검사하는 방법을 다룬다. 블로그 API에 `CreatePostDto`, `UpdatePostDto` 등의 DTO를 만들고 `ValidationPipe`으로 입력값을 검증할 것이다.
-
-
-```
-
-> **팁:** 미들웨어에서 발생한 에러는 NestJS의 Exception Filter가 처리합니다 (챕터 8 참고).
 ---
 
 ## 다음 챕터 예고

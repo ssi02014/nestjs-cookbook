@@ -1453,6 +1453,6 @@ export class PaginationQueryDto {
 - Swagger UI에서 JWT 토큰을 입력하고 인증이 필요한 API도 바로 테스트할 수 있다
 - 프론트엔드 개발자가 별도의 API 명세서 없이 Swagger UI만으로 API를 파악할 수 있다
 
-### 다음 챕터 예고
+## 다음 챕터 예고
 
 **챕터 15 - WebSocket**에서는 실시간 댓글 알림 기능을 구현한다. 게시글을 보고 있는 사용자에게 새 댓글이 작성되면 실시간으로 알림을 전송하는 기능을 `@nestjs/websockets`와 Socket.IO로 구현한다.
