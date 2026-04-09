@@ -869,6 +869,69 @@ export class CommentsModule {}
 
 > `CommentsModule`은 가장 많은 모듈을 import한다. 댓글은 "누가(User) 어떤 글(Post)에 작성했는지"를 알아야 하므로, 사용자 모듈과 게시글 모듈 모두 필요하다.
 
+### 스텁 파일 생성 (컴파일 오류 방지)
+
+위의 모듈 파일들은 컨트롤러와 서비스를 이미 `import`하여 등록하고 있다. 파일이 없으면 서버가 시작되지 않으므로, 챕터 2~3에서 본격적으로 작성하기 전에 **빈 스텁 파일**을 먼저 만들어 두어야 한다.
+
+```typescript
+// src/users/users.controller.ts
+import { Controller } from '@nestjs/common';
+
+@Controller('users')
+export class UsersController {}
+```
+
+```typescript
+// src/users/users.service.ts
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class UsersService {}
+```
+
+```typescript
+// src/posts/posts.controller.ts
+import { Controller } from '@nestjs/common';
+
+@Controller('posts')
+export class PostsController {}
+```
+
+```typescript
+// src/posts/posts.service.ts
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class PostsService {}
+```
+
+```typescript
+// src/comments/comments.controller.ts
+import { Controller } from '@nestjs/common';
+
+@Controller('comments')
+export class CommentsController {}
+```
+
+```typescript
+// src/comments/comments.service.ts
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class CommentsService {}
+```
+
+> **팁:** NestJS CLI를 사용하면 스텁 파일을 자동으로 생성할 수 있다.
+> ```bash
+> nest g controller users --no-spec
+> nest g service users --no-spec
+> nest g controller posts --no-spec
+> nest g service posts --no-spec
+> nest g controller comments --no-spec
+> nest g service comments --no-spec
+> ```
+> `--no-spec` 옵션을 붙이면 테스트 파일(`.spec.ts`)은 생성하지 않는다. CLI로 생성하면 모듈 파일에도 자동으로 등록되지만, 이미 위에서 직접 등록했으므로 중복 등록 여부를 확인한다.
+
 ---
 
 ## 12. 완성된 모듈 구조 확인
@@ -886,18 +949,18 @@ src/
 │
 ├── users/                     # 사용자 관리 모듈
 │   ├── users.module.ts
-│   ├── users.controller.ts    # (다음 챕터에서 작성)
-│   └── users.service.ts       # (다음 챕터에서 작성)
+│   ├── users.controller.ts    # 스텁 (챕터 2에서 라우트 추가)
+│   └── users.service.ts       # 스텁 (챕터 3에서 로직 구현)
 │
 ├── posts/                     # 게시글 관리 모듈
 │   ├── posts.module.ts
-│   ├── posts.controller.ts    # (다음 챕터에서 작성)
-│   └── posts.service.ts       # (다음 챕터에서 작성)
+│   ├── posts.controller.ts    # 스텁 (챕터 2에서 라우트 추가)
+│   └── posts.service.ts       # 스텁 (챕터 3에서 로직 구현)
 │
 └── comments/                  # 댓글 관리 모듈
     ├── comments.module.ts
-    ├── comments.controller.ts # (다음 챕터에서 작성)
-    └── comments.service.ts    # (다음 챕터에서 작성)
+    ├── comments.controller.ts # 스텁 (챕터 2에서 라우트 추가)
+    └── comments.service.ts    # 스텁 (챕터 3에서 로직 구현)
 ```
 
 ### 모듈 의존성 전체 다이어그램
