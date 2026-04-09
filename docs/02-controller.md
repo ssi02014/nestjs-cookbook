@@ -802,10 +802,13 @@ export class CreateUserDto {
 ```typescript
 // users/users.controller.ts
 import { Controller, Get, Post, Param, Body } from '@nestjs/common';
+import { CommonService } from '../common/common.service';
 import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
+  constructor(private readonly commonService: CommonService) {}
+
   private users = [
     { id: 1, email: 'hong@example.com', name: '홍길동', createdAt: '2025-01-01' },
   ];
@@ -821,7 +824,7 @@ export class UsersController {
       email: createUserDto.email,
       name: createUserDto.name,
       // 비밀번호는 응답에 포함하지 않는다 (보안)
-      createdAt: new Date().toISOString().split('T')[0],
+      createdAt: this.commonService.formatDate(new Date()),
     };
     this.users.push(newUser);
     return newUser;
@@ -902,11 +905,13 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
+import { CommonService } from '../common/common.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
 @Controller('posts')
 export class PostsController {
+  constructor(private readonly commonService: CommonService) {}
   private posts = [
     {
       id: 1,
@@ -969,7 +974,7 @@ export class PostsController {
   // ──────────────────────────────────────
   @Post()
   create(@Body() createPostDto: CreatePostDto) {
-    const now = new Date().toISOString().split('T')[0];
+    const now = this.commonService.formatDate(new Date());
     const newPost = {
       id: this.nextId++,
       ...createPostDto,
@@ -992,7 +997,7 @@ export class PostsController {
     this.posts[index] = {
       ...this.posts[index],
       ...updatePostDto,
-      updatedAt: new Date().toISOString().split('T')[0],
+      updatedAt: this.commonService.formatDate(new Date()),
     };
     return this.posts[index];
   }
@@ -1075,6 +1080,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
+import { CommonService } from '../common/common.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 
 // ──────────────────────────────────────
@@ -1084,6 +1090,8 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 // ──────────────────────────────────────
 @Controller('posts/:postId/comments')
 export class PostCommentsController {
+  constructor(private readonly commonService: CommonService) {}
+
   // 여러 컨트롤러에서 같은 데이터를 공유하려면 Service가 필요하다.
   // 지금은 임시로 static 배열을 사용한다.
   static comments = [
@@ -1100,7 +1108,7 @@ export class PostCommentsController {
       id: PostCommentsController.nextId++,
       postId: +postId,
       ...createCommentDto,
-      createdAt: new Date().toISOString().split('T')[0],
+      createdAt: this.commonService.formatDate(new Date()),
     };
     PostCommentsController.comments.push(newComment);
     return newComment;

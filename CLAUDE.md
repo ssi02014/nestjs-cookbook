@@ -185,6 +185,22 @@ nest-study/
 
 CLAUDE.md가 실제 상태와 달라지면 에이전트가 잘못된 기준으로 작업할 수 있다.
 
+### 블로그 API 예제 코드 품질
+
+3단계(블로그 API 적용)의 예제 코드는 이미 만들어진 서비스와 유틸리티를 재사용해야 한다:
+
+- **하드코딩 금지**: 날짜 포맷, 슬러그 생성 등 공통 로직은 인라인으로 중복 작성하지 않는다
+- **`CommonService` 우선 사용**: `formatDate()`, `generateSlug()` 등 이미 정의된 메서드를 활용한다
+- **이 규칙은 3단계에만 적용**: 2단계(기본 예제)는 개념 설명이 목적이므로 간결한 인라인 코드를 허용한다
+
+```typescript
+// ❌ 3단계에서 금지
+createdAt: new Date().toISOString().split('T')[0],
+
+// ✅ 3단계에서 권장
+createdAt: this.commonService.formatDate(new Date()),
+```
+
 ### 공식 문서 기반 원칙
 
 모든 챕터 내용은 **https://docs.nestjs.com/** 을 기준으로 한다:
