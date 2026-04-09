@@ -1,13 +1,18 @@
+<!--배너-->
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=E0234E&height=200&section=header&text=NestJS%20Study&fontSize=60&fontColor=ffffff&fontAlignY=38&desc=무료로%20배우는%20NestJS%20학습%20저장소&descAlignY=58&descSize=20" width="100%" />
+</div>
+
+<br/>
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank">
+    <img src="https://nestjs.com/img/logo-small.svg" width="80" alt="Nest Logo" />
+  </a>
 </p>
 
-<h1 align="center">NestJS 학습 로드맵</h1>
 
-<p align="center">
-  AI 기반으로 구성된 <strong>NestJS 완전 정복 학습 가이드</strong><br/>
-  17개 챕터를 따라가며 <strong>블로그 API</strong>를 처음부터 끝까지 완성합니다.
-</p>
+<br/>
 
 <p align="center">
   <img src="https://img.shields.io/badge/NestJS-v10-E0234E?logo=nestjs" alt="NestJS" />
@@ -18,7 +23,7 @@
 
 ---
 
-## 이 프로젝트는?
+## 이 저장소는?
 
 NestJS를 **처음 배우는 초보자**를 위한 단계별 학습 로드맵입니다.
 
@@ -26,7 +31,6 @@ NestJS를 **처음 배우는 초보자**를 위한 단계별 학습 로드맵입
 - 챕터를 순서대로 따라가면 **실제 동작하는 블로그 API 서버**가 완성
 - 모든 내용은 [NestJS 공식 문서](https://docs.nestjs.com)를 기반으로 검증
 - AI(Claude Code)가 구조 설계, 예제 코드, 설명을 작성하고 공식 문서로 크로스체크
-
 ---
 
 ## 학습 구조
@@ -129,21 +133,82 @@ Phase 7  + CQRS 패턴 → + 알림 마이크로서비스 ── 완성!
 
 ---
 
-## 시작하기
+## 이 저장소 활용하는 방법
 
-### 1. 프로젝트 설치
+### 권장: Fork 해서 나만의 학습 저장소로 만들기
+
+단순히 클론만 하면 내 기록이 남지 않습니다.
+**Fork**하면 GitHub에 내 학습 이력이 커밋으로 남고, 자유롭게 수정할 수 있습니다.
+
+```
+1. 우측 상단 Fork 버튼 클릭
+        │
+        ▼
+2. 내 GitHub 계정에 복사됨
+   (github.com/내아이디/nest-study)
+        │
+        ▼
+3. 내 저장소를 로컬에 클론
+        │
+        ▼
+4. 챕터를 학습하면서 직접 코드 작성
+        │
+        ▼
+5. 챕터마다 커밋 → 내 잔디가 쌓임 🌱
+```
 
 ```bash
+# Fork 후 내 저장소 클론
+git clone https://github.com/내아이디/nest-study.git
+cd nest-study
 yarn install
 ```
 
-### 2. 개발 서버 실행
+> **왜 Fork를 추천하나요?**
+> - 챕터별로 커밋하면 학습 이력이 GitHub에 기록됩니다
+> - 원본이 업데이트되면 `upstream`으로 동기화할 수 있습니다
+> - 나만의 노트나 코드를 추가해도 원본에 영향이 없습니다
+
+---
+
+### 학습 흐름
+
+```
+Fork → 클론 → docs 읽기 → 코드 작성 → 커밋 → 다음 챕터
+```
+
+| 단계 | 행동 |
+|------|------|
+| 1 | `docs/00-roadmap.md` 전체 구조 파악 |
+| 2 | `docs/01-module.md`부터 순서대로 읽기 |
+| 3 | 예제 코드를 `src/`에 직접 타이핑 |
+| 4 | `yarn run start:dev`로 동작 확인 |
+| 5 | `git commit -m "chap01: module 학습 완료"` |
+| 6 | 다음 챕터로 이동 |
+
+---
+
+## 시작하기
+
+### 1. 저장소 Fork
+
+GitHub 우측 상단 **Fork** 버튼을 눌러 내 계정으로 복사하세요.
+
+### 2. 클론 및 설치
+
+```bash
+git clone https://github.com/내아이디/nest-study.git
+cd nest-study
+yarn install
+```
+
+### 3. 개발 서버 실행
 
 ```bash
 yarn run start:dev
 ```
 
-### 3. 학습 시작
+### 4. 학습 시작
 
 [`docs/00-roadmap.md`](./docs/00-roadmap.md)를 열고 챕터 1부터 순서대로 진행하세요.
 
