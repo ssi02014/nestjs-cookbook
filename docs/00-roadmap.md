@@ -97,7 +97,24 @@ API 문서 자동화와 실시간 기능을 학습합니다.
 | 16 | CQRS | [16-cqrs.md](./16-cqrs.md) | Command/Query 분리, EventBus, Saga | 게시글 CQRS 리팩토링 |
 | 17 | Microservices | [17-microservices.md](./17-microservices.md) | TCP/Redis, MessagePattern, 하이브리드 앱 | 알림 마이크로서비스 분리 |
 
-> Phase 7을 마치면: **블로그 API + 알림 마이크로서비스 = 전체 프로젝트 완성!**
+> Phase 7을 마치면: **블로그 API + 알림 마이크로서비스 = 현재 로드맵 완성!**
+
+---
+
+## Phase 8+: 확장 학습 (추가 예정)
+
+Phase 7 이후에도 학습을 이어갈 수 있습니다. 아래 주제들이 추가될 수 있습니다.
+
+| 주제 | 핵심 개념 |
+|------|-----------|
+| GraphQL | Schema, Resolver, DataLoader |
+| Docker | 컨테이너화, docker-compose |
+| Redis | 캐싱, 세션, Pub/Sub |
+| Kafka | 메시지 큐, 이벤트 스트리밍 |
+| gRPC | Protocol Buffers, 고성능 통신 |
+| CI/CD | GitHub Actions, 자동 배포 |
+
+> 새 챕터가 추가되면 이 로드맵도 함께 업데이트됩니다.
 
 ---
 

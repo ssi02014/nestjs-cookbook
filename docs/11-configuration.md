@@ -226,9 +226,9 @@ const dbConfig = this.configService.get('database');
 // { path: './blog.sqlite' }
 ```
 
-### 타입 안전한 접근: @Inject + ConfigType
+### 타입 안전한 접근: [@Inject](../references/decorators.md#injecttoken) + ConfigType
 
-`registerAs()`로 정의한 설정은 `@Inject`와 `ConfigType`을 조합하면 타입이 자동으로 추론된다. 이것이 가장 권장되는 방법이다.
+`registerAs()`로 정의한 설정은 [`@Inject`](../references/decorators.md#injecttoken)와 `ConfigType`을 조합하면 타입이 자동으로 추론된다. 이것이 가장 권장되는 방법이다.
 
 ```typescript
 import { Injectable, Inject } from '@nestjs/common';
@@ -897,7 +897,7 @@ JWT_ACCESS_EXPIRATION=1h
 | `@nestjs/config` | `.env` 파일을 읽어 `ConfigService`로 안전하게 접근하게 해주는 공식 패키지 |
 | `ConfigModule.forRoot()` | `isGlobal: true`로 전역 설정, `load`로 네임스페이스 등록, `validationSchema`로 검증 |
 | `ConfigService` | `get()`, `getOrThrow()`로 환경 변수를 읽는다. `main.ts`에서는 `app.get(ConfigService)`로 사용 |
-| `registerAs()` | 관련 설정을 네임스페이스로 묶는다. `@Inject(config.KEY)` + `ConfigType`으로 타입 안전하게 접근 |
+| `registerAs()` | 관련 설정을 네임스페이스로 묶는다. [`@Inject(config.KEY)`](../references/decorators.md#injecttoken) + `ConfigType`으로 타입 안전하게 접근 |
 | `.env` + `.env.example` | `.env`는 Git에서 제외, `.env.example`은 커밋하여 팀원에게 필요한 변수 목록을 알린다 |
 | Joi 유효성 검사 | 필수 환경 변수가 빠졌을 때 시작 시점에 즉시 실패하도록 한다 |
 | `forRootAsync()` | TypeORM 등 외부 모듈 설정에 ConfigService를 주입하기 위해 사용한다 |

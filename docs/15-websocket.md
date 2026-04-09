@@ -99,7 +99,7 @@ export class EchoGateway {}
 
 ### @SubscribeMessage
 
-특정 이벤트를 구독하여, 해당 이벤트가 발생했을 때 메서드를 실행한다. REST API의 `@Get()`, `@Post()` 같은 역할이라고 생각하면 이해하기 쉽다.
+특정 이벤트를 구독하여, 해당 이벤트가 발생했을 때 메서드를 실행한다. REST API의 [`@Get()`](../references/decorators.md#http-메서드-데코레이터), [`@Post()`](../references/decorators.md#http-메서드-데코레이터) 같은 역할이라고 생각하면 이해하기 쉽다.
 
 ```typescript
 // echo.gateway.ts

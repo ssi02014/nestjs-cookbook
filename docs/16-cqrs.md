@@ -454,7 +454,7 @@ Saga의 핵심 포인트:
 
 이전 챕터에서 만들어 온 블로그 게시글 도메인을 CQRS 패턴으로 리팩토링한다. 기존의 `PostsService` 한 곳에 모여 있던 로직을 Command, Query, Event로 분리하는 것이 목표다.
 
-> **챕터 10 연결**: 이 섹션은 챕터 10에서 도입한 TypeORM + SQLite 환경을 그대로 이어받는다. 챕터 10에서 정의한 `Post` 엔티티(`@Entity()` 데코레이터가 붙은 TypeORM 엔티티)와 `TypeOrmModule.forFeature([Post])`로 등록된 Repository를 Handler에서 직접 주입받아 사용한다. 별도의 인메모리 저장소를 만들지 않아도 된다.
+> **챕터 10 연결**: 이 섹션은 챕터 10에서 도입한 TypeORM + SQLite 환경을 그대로 이어받는다. 챕터 10에서 정의한 `Post` 엔티티([`@Entity()`](../references/decorators.md#entitytablename) 데코레이터가 붙은 TypeORM 엔티티)와 `TypeOrmModule.forFeature([Post])`로 등록된 Repository를 Handler에서 직접 주입받아 사용한다. 별도의 인메모리 저장소를 만들지 않아도 된다.
 
 ### 디렉토리 구조
 
@@ -533,7 +533,7 @@ export class Post {
 }
 ```
 
-> **팁:**: `@CreateDateColumn()`과 `@UpdateDateColumn()`은 TypeORM이 자동으로 값을 채워준다. 별도로 `new Date()`를 넣을 필요가 없다.
+> **팁:**: [`@CreateDateColumn()`](../references/decorators.md#createdatecolumn-updatedatecolumn-deletedatecolumn)과 [`@UpdateDateColumn()`](../references/decorators.md#createdatecolumn-updatedatecolumn-deletedatecolumn)은 TypeORM이 자동으로 값을 채워준다. 별도로 `new Date()`를 넣을 필요가 없다.
 
 ### 2. DTO 정의
 
@@ -1060,7 +1060,7 @@ const EventHandlers = [PostCreatedHandler, PostUpdatedHandler, PostDeletedHandle
 export class PostsModule {}
 ```
 
-> **팁:**: `TypeOrmModule.forFeature([Post])`를 imports에 추가하면 `@InjectRepository(Post)`로 `Repository<Post>`를 주입받을 수 있게 된다. 별도의 커스텀 `PostsRepository` 클래스를 providers에 등록할 필요가 없다.
+> **팁:**: `TypeOrmModule.forFeature([Post])`를 imports에 추가하면 [`@InjectRepository(Post)`](../references/decorators.md#injecttoken)로 `Repository<Post>`를 주입받을 수 있게 된다. 별도의 커스텀 `PostsRepository` 클래스를 providers에 등록할 필요가 없다.
 
 ### 전체 실행 흐름
 

@@ -240,7 +240,7 @@ describe('PostsService', () => {
 
 | 메서드 | 설명 |
 |--------|------|
-| `Test.createTestingModule(metadata)` | 테스트용 모듈 생성. `@Module()` 데코레이터와 동일한 메타데이터를 받는다 |
+| `Test.createTestingModule(metadata)` | 테스트용 모듈 생성. [`@Module()`](../references/decorators.md#moduleoptions) 데코레이터와 동일한 메타데이터를 받는다 |
 | `.compile()` | 모듈을 컴파일하고 `TestingModule` 인스턴스를 반환한다 |
 | `module.get<T>(token)` | 모듈에 등록된 프로바이더를 토큰으로 조회한다 |
 | `module.createNestApplication()` | E2E 테스트를 위한 NestJS 앱 인스턴스를 생성한다 |
@@ -466,7 +466,7 @@ describe('ItemsService', () => {
 });
 ```
 
-> **팁:**: `getRepositoryToken(Entity)`는 `@nestjs/typeorm`에서 제공하는 유틸 함수다. `@InjectRepository(Entity)`로 주입되는 Repository의 DI 토큰을 가져와, 테스트에서 해당 토큰에 Mock 객체를 연결할 수 있게 해준다.
+> **팁:**: `getRepositoryToken(Entity)`는 `@nestjs/typeorm`에서 제공하는 유틸 함수다. [`@InjectRepository(Entity)`](../references/decorators.md#injecttoken)로 주입되는 Repository의 DI 토큰을 가져와, 테스트에서 해당 토큰에 Mock 객체를 연결할 수 있게 해준다.
 
 ---
 
@@ -1665,7 +1665,7 @@ describe('PostsController', () => {
 });
 ```
 
-> **팁:**: 단위 테스트에서는 `@UseGuards(JwtAuthGuard)`가 실행되지 않는다. Guard 동작은 E2E 테스트에서 검증한다. 단위 테스트에서는 순수 로직 호출만 집중하면 된다. `mockRequest` 객체를 직접 만들어서 `req.user`를 시뮬레이션한 부분에 주목하자.
+> **팁:**: 단위 테스트에서는 [`@UseGuards(JwtAuthGuard)`](../references/decorators.md#useguardsguards)가 실행되지 않는다. Guard 동작은 E2E 테스트에서 검증한다. 단위 테스트에서는 순수 로직 호출만 집중하면 된다. `mockRequest` 객체를 직접 만들어서 `req.user`를 시뮬레이션한 부분에 주목하자.
 
 ---
 

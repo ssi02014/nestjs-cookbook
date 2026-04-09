@@ -27,6 +27,7 @@
 
 ---
 
+
 ## 1단계: 개념 학습
 
 ### 1-1. Exception Filter란?
@@ -183,7 +184,7 @@ export class EntityNotFoundException extends BusinessException {
 
 ---
 
-### 1-5. @Catch() 데코레이터와 ExceptionFilter 인터페이스
+### 1-5. [@Catch()](../references/decorators.md#catchexceptiontype) 데코레이터와 ExceptionFilter 인터페이스
 
 커스텀 Exception Filter를 만들기 위해 필요한 두 가지 핵심 요소가 있다.
 
@@ -202,7 +203,7 @@ export interface ExceptionFilter<T = any> {
 | `exception` | `T` | 현재 처리 중인 예외 객체 |
 | `host` | `ArgumentsHost` | 요청/응답 객체에 접근할 수 있는 유틸리티 |
 
-#### @Catch() 데코레이터
+#### [@Catch()](../references/decorators.md#catchexceptiontype) 데코레이터
 
 이 필터가 **어떤 예외 타입**을 처리할지 지정한다.
 
@@ -535,7 +536,7 @@ export class PostsController {
 
 ### 2-3. 전역 예외 필터 (AllExceptionsFilter)
 
-`@Catch(HttpException)`은 HttpException 계열만 잡는다. 만약 코드에서 `TypeError`나 `ReferenceError` 같은 일반 JavaScript 에러가 발생하면 이 필터를 통과해버린다. **모든 예외를 빠짐없이 잡으려면** `@Catch()` 인자를 비워두면 된다.
+[`@Catch(HttpException)`](../references/decorators.md#catchexceptiontype)은 HttpException 계열만 잡는다. 만약 코드에서 `TypeError`나 `ReferenceError` 같은 일반 JavaScript 에러가 발생하면 이 필터를 통과해버린다. **모든 예외를 빠짐없이 잡으려면** [`@Catch()`](../references/decorators.md#catchexceptiontype) 인자를 비워두면 된다.
 
 ```typescript
 // src/common/filters/all-exceptions.filter.ts
@@ -684,9 +685,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
 }
 ```
 
-**왜 `@Catch()`에 인자를 넣지 않았을까?**
+**왜 [`@Catch()`](../references/decorators.md#catchexceptiontype)에 인자를 넣지 않았을까?**
 
-`@Catch(HttpException)`으로 하면 HttpException만 잡는다. 하지만 서비스 로직에서 예상치 못한 `TypeError`나 `RangeError` 같은 일반 에러가 발생할 수도 있다. `@Catch()`로 모든 예외를 잡아서 통일된 포맷으로 응답하면, 클라이언트 입장에서 어떤 에러든 같은 구조로 처리할 수 있다.
+[`@Catch(HttpException)`](../references/decorators.md#catchexceptiontype)으로 하면 HttpException만 잡는다. 하지만 서비스 로직에서 예상치 못한 `TypeError`나 `RangeError` 같은 일반 에러가 발생할 수도 있다. [`@Catch()`](../references/decorators.md#catchexceptiontype)로 모든 예외를 잡아서 통일된 포맷으로 응답하면, 클라이언트 입장에서 어떤 에러든 같은 구조로 처리할 수 있다.
 
 ---
 

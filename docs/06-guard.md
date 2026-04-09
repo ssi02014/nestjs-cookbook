@@ -17,6 +17,7 @@
 
 ---
 
+
 ## 1. Guard란 무엇인가
 
 Guard(가드)는 NestJS에서 **인증(Authentication)** 과 **인가(Authorization)** 를 담당하는 컴포넌트다. 쉽게 말하면 건물 입구의 **경비원**과 같다. 누군가 들어오려 할 때 "신분증이 있는가?"(인증)를 확인하고, "이 구역에 출입할 권한이 있는가?"(인가)를 판단한다.
@@ -31,7 +32,7 @@ Guard(가드)는 NestJS에서 **인증(Authentication)** 과 **인가(Authorizat
 
 ### Guard의 핵심 특징
 
-- `@Injectable()` 데코레이터가 붙은 클래스로, `CanActivate` 인터페이스를 구현한다.
+- [`@Injectable()`](../references/decorators.md#injectableoptions) 데코레이터가 붙은 클래스로, `CanActivate` 인터페이스를 구현한다.
 - 요청이 컨트롤러 핸들러에 도달하기 **전에** 실행된다.
 - `true`를 반환하면 요청이 계속 진행되고, `false`를 반환하면 `ForbiddenException`(403)이 자동 발생한다.
 - 커스텀 예외를 던지고 싶다면 `UnauthorizedException` 등을 직접 throw할 수 있다.
@@ -367,7 +368,7 @@ const roles = this.reflector.getAllAndOverride<string[]>('roles', [
 
 ### 커스텀 데코레이터로 깔끔하게 만들기
 
-`@SetMetadata('roles', ['admin'])`을 매번 쓰는 것은 번거롭고 오타 위험이 있다. 커스텀 데코레이터를 만들면 깔끔해진다.
+[`@SetMetadata('roles', ['admin'])`](../references/decorators.md#6-guard-pipe-filter-interceptor-바인딩-데코레이터)을 매번 쓰는 것은 번거롭고 오타 위험이 있다. 커스텀 데코레이터를 만들면 깔끔해진다.
 
 ```typescript
 // src/common/decorators/roles.decorator.ts
@@ -1033,7 +1034,7 @@ src/
 
 ## 8. 여러 Guard 동시 적용 시 실행 순서
 
-`@UseGuards()`에 여러 Guard를 전달하면 **왼쪽에서 오른쪽** 순서로 순차 실행된다.
+[`@UseGuards()`](../references/decorators.md#useguardsguards)에 여러 Guard를 전달하면 **왼쪽에서 오른쪽** 순서로 순차 실행된다.
 
 ```typescript
 // src/posts/posts.controller.ts
@@ -1127,9 +1128,9 @@ export class DbPermissionGuard implements CanActivate {
 | Guard의 역할 | 컨트롤러 실행 전에 **인증/인가**를 판단하는 경비원 |
 | `CanActivate` | Guard가 구현해야 하는 인터페이스, `canActivate()` 메서드 하나 |
 | `ExecutionContext` | 현재 요청의 컨트롤러, 핸들러 정보에 접근 가능한 컨텍스트 |
-| `@UseGuards()` | Guard를 메서드/컨트롤러에 바인딩하는 데코레이터 |
+| [`@UseGuards()`](../references/decorators.md#useguardsguards) | Guard를 메서드/컨트롤러에 바인딩하는 데코레이터 |
 | `APP_GUARD` | 글로벌 가드를 DI와 함께 등록하는 토큰 (실전 권장) |
-| `@SetMetadata()` | 핸들러에 커스텀 메타데이터를 첨부하는 데코레이터 |
+| [`@SetMetadata()`](../references/decorators.md#setmetadatakey-value) | 핸들러에 커스텀 메타데이터를 첨부하는 데코레이터 |
 | `Reflector` | Guard 내에서 메타데이터를 읽어오는 헬퍼 클래스 |
 | `@Public()` | 글로벌 Guard 하에서 특정 라우트를 공개로 표시 |
 | `@Roles()` | 핸들러에 필요한 역할을 지정하는 커스텀 데코레이터 |

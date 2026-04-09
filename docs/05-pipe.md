@@ -19,9 +19,10 @@
 
 ---
 
+
 ## 1. Pipe란 무엇인가
 
-Pipe는 `@Injectable()` 데코레이터가 붙은 클래스로, `PipeTransform` 인터페이스를 구현한다. 컨트롤러 핸들러가 호출되기 **직전**에 실행되며, 두 가지 역할을 수행한다.
+Pipe는 [`@Injectable()`](../references/decorators.md#injectableoptions) 데코레이터가 붙은 클래스로, `PipeTransform` 인터페이스를 구현한다. 컨트롤러 핸들러가 호출되기 **직전**에 실행되며, 두 가지 역할을 수행한다.
 
 ### 변환 (Transformation)
 
@@ -87,7 +88,7 @@ export class PostsController {
 
 ### 3-2. 메서드 레벨 (Method-scoped)
 
-`@UsePipes()` 데코레이터로 특정 핸들러의 모든 파라미터에 파이프를 적용한다.
+[`@UsePipes()`](../references/decorators.md#usepipespipes) 데코레이터로 특정 핸들러의 모든 파라미터에 파이프를 적용한다.
 
 ```typescript
 // posts.controller.ts
@@ -106,7 +107,7 @@ export class PostsController {
 
 ### 3-3. 컨트롤러 레벨 (Controller-scoped)
 
-컨트롤러 클래스에 `@UsePipes()`를 적용하면 해당 컨트롤러의 모든 핸들러에 파이프가 적용된다.
+컨트롤러 클래스에 [`@UsePipes()`](../references/decorators.md#usepipespipes)를 적용하면 해당 컨트롤러의 모든 핸들러에 파이프가 적용된다.
 
 ```typescript
 // posts.controller.ts
@@ -544,7 +545,7 @@ export class CreatePostDto {
 
 `transform: true`를 설정하면 두 가지 효과가 있다.
 
-1. **일반 객체를 DTO 클래스 인스턴스로 변환**: `@Body()`로 받은 데이터가 실제 DTO 클래스의 인스턴스가 된다.
+1. **일반 객체를 DTO 클래스 인스턴스로 변환**: [`@Body()`](../references/decorators.md#bodykey)로 받은 데이터가 실제 DTO 클래스의 인스턴스가 된다.
 2. **원시 타입 자동 변환**: 경로 파라미터와 쿼리 파라미터의 문자열이 TypeScript 타입에 맞게 자동 변환된다.
 
 ```typescript
@@ -583,7 +584,7 @@ export interface ArgumentMetadata {
 - `value`: 파이프에 전달된 입력 값
 - `metadata.type`: 인자의 출처 (body, query, param, custom)
 - `metadata.metatype`: 인자의 메타타입 (예: `String`, `CreatePostDto`)
-- `metadata.data`: 데코레이터에 전달된 문자열 (예: `@Body('title')`에서 `'title'`)
+- `metadata.data`: 데코레이터에 전달된 문자열 (예: [`@Body('title')`](../references/decorators.md#bodykey)에서 `'title'`)
 
 ### 예제: 문자열 트림(Trim) 파이프
 

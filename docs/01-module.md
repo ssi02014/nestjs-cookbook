@@ -26,6 +26,7 @@
 
 ---
 
+
 ## 1. Module이란 무엇인가
 
 ### 왜 모듈이 필요한가?
@@ -48,7 +49,7 @@
 
 ### 클래스 하나로 정의된다
 
-NestJS에서 모듈은 `@Module()` 데코레이터가 붙은 클래스다. 모든 NestJS 앱에는 반드시 **하나 이상의 모듈**이 존재하며, 가장 최상위에 위치하는 모듈을 **루트 모듈(Root Module)** 이라고 부른다. 보통 `AppModule`이 이 역할을 한다.
+NestJS에서 모듈은 [`@Module()`](../references/decorators.md#moduleoptions) 데코레이터가 붙은 클래스다. 모든 NestJS 앱에는 반드시 **하나 이상의 모듈**이 존재하며, 가장 최상위에 위치하는 모듈을 **루트 모듈(Root Module)** 이라고 부른다. 보통 `AppModule`이 이 역할을 한다.
 
 ```typescript
 // app.module.ts
@@ -58,13 +59,13 @@ import { Module } from '@nestjs/common';
 export class AppModule {}
 ```
 
-> **팁:** `@Module()`은 데코레이터(Decorator)라고 불린다. 데코레이터는 클래스나 메서드 위에 `@`를 붙여서 추가 정보를 제공하는 문법이다. "이 클래스는 모듈이야"라고 NestJS에게 알려주는 표시라고 생각하면 된다.
+> **팁:** [`@Module()`](../references/decorators.md#moduleoptions)은 데코레이터(Decorator)라고 불린다. 데코레이터는 클래스나 메서드 위에 `@`를 붙여서 추가 정보를 제공하는 문법이다. "이 클래스는 모듈이야"라고 NestJS에게 알려주는 표시라고 생각하면 된다.
 
 ---
 
-## 2. @Module() 데코레이터의 4가지 속성
+## 2. [@Module()](../references/decorators.md#moduleoptions) 데코레이터의 4가지 속성
 
-`@Module()` 데코레이터는 하나의 객체를 인자로 받으며, 이 객체에는 4가지 속성을 지정할 수 있다. 각 속성이 어떤 역할을 하는지 하나씩 알아보자.
+[`@Module()`](../references/decorators.md#moduleoptions) 데코레이터는 하나의 객체를 인자로 받으며, 이 객체에는 4가지 속성을 지정할 수 있다. 각 속성이 어떤 역할을 하는지 하나씩 알아보자.
 
 ```typescript
 @Module({
@@ -133,11 +134,11 @@ bootstrap();
 
 ---
 
-## 4. 전역 모듈 (@Global)
+## 4. 전역 모듈 ([@Global](../references/decorators.md#global))
 
 일반적인 모듈은 사용하려는 모듈마다 `imports`에 등록해야 한다. 하지만 **데이터베이스 연결**, **로깅**, **설정 관리**처럼 앱 전체에서 공통으로 쓰이는 모듈이 있다면, 매번 `imports`에 추가하는 것은 번거롭다.
 
-이때 `@Global()` 데코레이터를 사용하면 **전역 모듈**로 만들 수 있다. 전역 모듈은 루트 모듈에서 한 번만 import하면, 이후 다른 모듈에서는 import 없이 해당 provider를 사용할 수 있다.
+이때 [`@Global()`](../references/decorators.md#global) 데코레이터를 사용하면 **전역 모듈**로 만들 수 있다. 전역 모듈은 루트 모듈에서 한 번만 import하면, 이후 다른 모듈에서는 import 없이 해당 provider를 사용할 수 있다.
 
 ```typescript
 import { Module, Global } from '@nestjs/common';
@@ -151,7 +152,7 @@ import { DatabaseService } from './database.service';
 export class DatabaseModule {}
 ```
 
-> **팁:** `@Global()`을 붙여도 `exports`는 반드시 작성해야 한다. `@Global()`은 "import 없이 접근 가능하게 해줘"라는 의미이지, "모든 것을 공개해줘"라는 의미가 아니다. 또한, 전역 모듈을 남용하면 모듈 간 의존 관계가 불명확해지므로 꼭 필요한 경우에만 사용하자.
+> **팁:** [`@Global()`](../references/decorators.md#global)을 붙여도 `exports`는 반드시 작성해야 한다. [`@Global()`](../references/decorators.md#global)은 "import 없이 접근 가능하게 해줘"라는 의미이지, "모든 것을 공개해줘"라는 의미가 아니다. 또한, 전역 모듈을 남용하면 모듈 간 의존 관계가 불명확해지므로 꼭 필요한 경우에만 사용하자.
 
 ---
 
@@ -243,7 +244,7 @@ AppModule (루트)
 ```
 
 **핵심 규칙 정리:**
-- `DatabaseModule`은 `@Global()`이므로 어떤 모듈에서든 별도 import 없이 `DatabaseService`를 주입받을 수 있다.
+- `DatabaseModule`은 [`@Global()`](../references/decorators.md#global)이므로 어떤 모듈에서든 별도 import 없이 `DatabaseService`를 주입받을 수 있다.
 - `CommonModule`은 일반 공유 모듈이므로, 사용하려는 모듈에서 반드시 `imports`에 명시해야 한다.
 - 각 Feature 모듈은 자신만의 컨트롤러와 provider를 **캡슐화**한다. 외부에 공개하지 않은 것은 내부에서만 사용된다.
 
@@ -286,7 +287,7 @@ export class CatsService {
 }
 ```
 
-> 이 코드는 `CatsService`라는 서비스 클래스를 정의한다. `@Injectable()`은 "이 클래스는 NestJS의 DI 시스템이 관리할 수 있어"라는 표시다. 내부에 고양이 목록을 배열로 보관하고, 추가(`create`)와 조회(`findAll`) 기능을 제공한다.
+> 이 코드는 `CatsService`라는 서비스 클래스를 정의한다. [`@Injectable()`](../references/decorators.md#injectableoptions)은 "이 클래스는 NestJS의 DI 시스템이 관리할 수 있어"라는 표시다. 내부에 고양이 목록을 배열로 보관하고, 추가(`create`)와 조회(`findAll`) 기능을 제공한다.
 
 ### 7-2. 컨트롤러 만들기
 
@@ -314,7 +315,7 @@ export class CatsController {
 }
 ```
 
-> 이 코드는 `CatsController`를 정의한다. `@Controller('cats')`는 이 컨트롤러가 `/cats` 경로를 담당한다는 의미다. 생성자에서 `CatsService`를 받아오고, POST 요청이 오면 고양이를 추가하고, GET 요청이 오면 전체 목록을 반환한다.
+> 이 코드는 `CatsController`를 정의한다. [`@Controller('cats')`](../references/decorators.md#controllerprefix)는 이 컨트롤러가 `/cats` 경로를 담당한다는 의미다. 생성자에서 `CatsService`를 받아오고, POST 요청이 오면 고양이를 추가하고, GET 요청이 오면 전체 목록을 반환한다.
 
 ### 7-3. 모듈로 묶기
 
@@ -822,10 +823,10 @@ src/
 | 개념 | 핵심 |
 |------|------|
 | Module | 관련 기능(컨트롤러 + 서비스)을 하나로 묶는 NestJS의 기본 구성 단위 |
-| @Module() 4가지 속성 | `imports`(가져오기), `controllers`(컨트롤러), `providers`(서비스), `exports`(공개) |
+| [@Module()](../references/decorators.md#moduleoptions) 4가지 속성 | `imports`(가져오기), `controllers`(컨트롤러), `providers`(서비스), `exports`(공개) |
 | 모듈 트리 | AppModule(루트)을 꼭대기로 Feature 모듈들이 연결되는 트리 구조 |
 | 공유 모듈 | `exports`로 provider를 공개하여 여러 모듈에서 재사용 |
-| 전역 모듈 | `@Global()`로 선언하면 import 없이 어디서든 사용 가능 (남용 주의) |
+| 전역 모듈 | [`@Global()`](../references/decorators.md#global)로 선언하면 import 없이 어디서든 사용 가능 (남용 주의) |
 | 동적 모듈 | `forRoot()` 등으로 설정값을 전달하며 모듈 등록 (이후 챕터에서 상세 학습) |
 | 캡슐화 원칙 | provider는 exports에 명시하지 않으면 모듈 외부에서 접근 불가 |
 ---

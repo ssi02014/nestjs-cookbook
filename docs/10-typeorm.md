@@ -34,6 +34,7 @@
 
 ---
 
+
 ## 1. ORM이란? TypeORM이란?
 
 ### ORM(Object-Relational Mapping)이란?
@@ -59,7 +60,7 @@ const result = db.query(            const users = await
 
 | 특징 | 설명 |
 |------|------|
-| **데코레이터 기반** | `@Entity()`, `@Column()` 등 NestJS와 동일한 데코레이터 패턴 |
+| **데코레이터 기반** | [`@Entity()`](../references/decorators.md#entitytablename), [`@Column()`](../references/decorators.md#columnoptions) 등 NestJS와 동일한 데코레이터 패턴 |
 | **다양한 DB 지원** | MySQL, PostgreSQL, SQLite, MariaDB, Oracle 등 |
 | **Repository 패턴** | 데이터 접근 로직을 깔끔하게 분리 |
 | **관계 매핑** | 1:1, 1:N, N:M 관계를 데코레이터로 표현 |
@@ -212,15 +213,15 @@ export class Cat {
 
 | 데코레이터 | 설명 | 예시 |
 |---|---|---|
-| `@Entity()` | 클래스를 테이블로 매핑 | `@Entity('users')` |
-| `@PrimaryGeneratedColumn()` | 자동 증가 PK | `id: number` |
-| `@PrimaryGeneratedColumn('uuid')` | UUID PK | `id: string` |
-| `@Column()` | 일반 컬럼 | `@Column({ type: 'varchar' })` |
-| `@CreateDateColumn()` | 생성 시간 자동 기록 | `createdAt: Date` |
-| `@UpdateDateColumn()` | 수정 시간 자동 기록 | `updatedAt: Date` |
-| `@DeleteDateColumn()` | 소프트 삭제 시간 | `deletedAt: Date` |
+| [`@Entity()`](../references/decorators.md#entitytablename) | 클래스를 테이블로 매핑 | [`@Entity('users')`](../references/decorators.md#entitytablename) |
+| [`@PrimaryGeneratedColumn()`](../references/decorators.md#컬럼-데코레이터) | 자동 증가 PK | `id: number` |
+| [`@PrimaryGeneratedColumn('uuid')`](../references/decorators.md#컬럼-데코레이터) | UUID PK | `id: string` |
+| [`@Column()`](../references/decorators.md#columnoptions) | 일반 컬럼 | [`@Column({ type: 'varchar' })`](../references/decorators.md#columnoptions) |
+| [`@CreateDateColumn()`](../references/decorators.md#createdatecolumn-updatedatecolumn-deletedatecolumn) | 생성 시간 자동 기록 | `createdAt: Date` |
+| [`@UpdateDateColumn()`](../references/decorators.md#createdatecolumn-updatedatecolumn-deletedatecolumn) | 수정 시간 자동 기록 | `updatedAt: Date` |
+| [`@DeleteDateColumn()`](../references/decorators.md#http-메서드-데코레이터) | 소프트 삭제 시간 | `deletedAt: Date` |
 
-### @Column 주요 옵션
+### [@Column](../references/decorators.md#columnoptions) 주요 옵션
 
 ```typescript
 @Column({
@@ -300,7 +301,7 @@ export class CatsModule {}
 > - `TypeOrmModule.forRoot()`: AppModule에서 **한 번만** 호출. DB 연결 설정.
 > - `TypeOrmModule.forFeature([Entity])`: 각 Feature 모듈에서 호출. 해당 모듈에서 사용할 Entity의 Repository를 등록.
 
-### 서비스에서 Repository 주입 - @InjectRepository()
+### 서비스에서 Repository 주입 - [@InjectRepository()](../references/decorators.md#injectrepositoryentity)
 
 ```typescript
 // src/cats/cats.service.ts
@@ -439,7 +440,7 @@ export class User {
 ```
 
 > **팁:** @JoinColumn은 ManyToOne에 안 붙여도 된다
-> `@ManyToOne()`은 자동으로 FK 컬럼(예: `authorId`)을 생성한다. `@JoinColumn()`은 OneToOne 관계에서만 필수이고, ManyToOne에서는 생략해도 된다.
+> [`@ManyToOne()`](../references/decorators.md#관계-데코레이터)은 자동으로 FK 컬럼(예: `authorId`)을 생성한다. [`@JoinColumn()`](../references/decorators.md#joincolumn-jointable)은 OneToOne 관계에서만 필수이고, ManyToOne에서는 생략해도 된다.
 
 ### ManyToMany (N:M 관계)
 
@@ -1480,8 +1481,8 @@ export class PostsService {
 ```
 
 > **팁:** 리팩토링 핵심 변화 3가지
-> 1. `private 배열` 삭제 → `@InjectRepository()`로 Repository 주입
-> 2. `idCounter` 삭제 → `@PrimaryGeneratedColumn()`이 ID 자동 생성
+> 1. `private 배열` 삭제 → [`@InjectRepository()`](../references/decorators.md#injecttoken)로 Repository 주입
+> 2. `idCounter` 삭제 → [`@PrimaryGeneratedColumn()`](../references/decorators.md#컬럼-데코레이터)이 ID 자동 생성
 > 3. 모든 메서드가 `async`가 됨 → DB 작업은 비동기(I/O)이므로
 
 ### UsersService (전체)
@@ -2112,9 +2113,9 @@ curl http://localhost:3000/posts/1
 | 주제 | 핵심 포인트 |
 |---|---|
 | ORM / TypeORM | SQL 대신 TypeScript 코드로 DB 조작. NestJS 공식 지원 |
-| Entity | `@Entity`, `@Column`, `@PrimaryGeneratedColumn`으로 테이블 매핑 |
-| Repository | `@InjectRepository()`로 주입. `find`, `save`, `remove` 등 기본 메서드 내장 |
-| 관계 | `@OneToMany` / `@ManyToOne` (1:N), `@OneToOne` (1:1), `@ManyToMany` (N:M) |
+| Entity | [`@Entity`](../references/decorators.md#entitytablename), [`@Column`](../references/decorators.md#columnoptions), [`@PrimaryGeneratedColumn`](../references/decorators.md#컬럼-데코레이터)으로 테이블 매핑 |
+| Repository | [`@InjectRepository()`](../references/decorators.md#injecttoken)로 주입. `find`, `save`, `remove` 등 기본 메서드 내장 |
+| 관계 | [`@OneToMany`](../references/decorators.md#관계-데코레이터) / [`@ManyToOne`](../references/decorators.md#관계-데코레이터) (1:N), [`@OneToOne`](../references/decorators.md#관계-데코레이터) (1:1), [`@ManyToMany`](../references/decorators.md#관계-데코레이터) (N:M) |
 | 마이그레이션 | 프로덕션에서는 `synchronize: false` + 마이그레이션으로 스키마 관리 |
 | 트랜잭션 | `DataSource.transaction()` 또는 `QueryRunner`로 원자적 작업 보장 |
 | 페이지네이션 | `findAndCount()` + `skip` / `take` + `order`로 구현 |
@@ -2375,7 +2376,7 @@ TypeORM은 관계 데이터를 로드하는 두 가지 방식을 제공한다.
 | 구분 | Eager Loading | Lazy Loading |
 |------|---------------|--------------|
 | **로드 시점** | 항상 자동으로 함께 조회 | 실제로 접근할 때 쿼리 실행 |
-| **설정 방법** | `@OneToMany(..., { eager: true })` | 관계 타입을 `Promise<T[]>`로 선언 |
+| **설정 방법** | [`@OneToMany(..., { eager: true })`](../references/decorators.md#관계-데코레이터) | 관계 타입을 `Promise<T[]>`로 선언 |
 | **추가 설정** | 없음 | `TypeOrmModule.forRoot`에 별도 설정 필요 |
 | **쿼리 수** | 적음 (JOIN 사용) | 많아질 수 있음 (N+1 위험) |
 | **NestJS 권장** | 상황에 따라 사용 | 비권장 (복잡성 증가) |

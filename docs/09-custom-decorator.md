@@ -24,6 +24,7 @@
 
 ---
 
+
 ## 1단계: 개념 학습
 
 ### 데코레이터란?
@@ -82,10 +83,10 @@ class Calculator {
 
 | 종류 | 적용 대상 | NestJS 예시 |
 |------|-----------|-------------|
-| 클래스 데코레이터 | 클래스 선언 위 | `@Controller()`, `@Injectable()`, `@Module()` |
-| 메서드 데코레이터 | 메서드 선언 위 | `@Get()`, `@Post()`, `@UseGuards()` |
-| 프로퍼티 데코레이터 | 프로퍼티 선언 위 | `@Inject()` |
-| 파라미터 데코레이터 | 파라미터 선언 위 | `@Body()`, `@Param()`, `@Query()` |
+| 클래스 데코레이터 | 클래스 선언 위 | [`@Controller()`](../references/decorators.md#controllerprefix), [`@Injectable()`](../references/decorators.md#injectableoptions), [`@Module()`](../references/decorators.md#moduleoptions) |
+| 메서드 데코레이터 | 메서드 선언 위 | [`@Get()`](../references/decorators.md#http-메서드-데코레이터), [`@Post()`](../references/decorators.md#http-메서드-데코레이터), [`@UseGuards()`](../references/decorators.md#useguardsguards) |
+| 프로퍼티 데코레이터 | 프로퍼티 선언 위 | [`@Inject()`](../references/decorators.md#injecttoken) |
+| 파라미터 데코레이터 | 파라미터 선언 위 | [`@Body()`](../references/decorators.md#bodykey), [`@Param()`](../references/decorators.md#paramkey), [`@Query()`](../references/decorators.md#querykey) |
 
 NestJS 코드를 보면 **거의 모든 곳에 데코레이터가 있다**. 이것이 바로 NestJS가 "데코레이터 기반 프레임워크"라고 불리는 이유다.
 
@@ -132,9 +133,9 @@ create(@CurrentUser('id') userId: number, @Body() dto: CreatePostDto) {
 
 ---
 
-### 커스텀 파라미터 데코레이터 (createParamDecorator)
+### 커스텀 파라미터 데코레이터 ([createParamDecorator](../references/decorators.md#createparamdecoratorfactory))
 
-NestJS에서 가장 많이 만드는 커스텀 데코레이터는 **파라미터 데코레이터**다. `createParamDecorator()` 함수를 사용하면 쉽게 만들 수 있다.
+NestJS에서 가장 많이 만드는 커스텀 데코레이터는 **파라미터 데코레이터**다. [`createParamDecorator()`](../references/decorators.md#createparamdecoratorfactory) 함수를 사용하면 쉽게 만들 수 있다.
 
 ```typescript
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
@@ -189,7 +190,7 @@ adminOnly() { ... }
 
 ### applyDecorators로 데코레이터 합성
 
-여러 데코레이터를 자주 함께 사용하는 패턴이 있다면, `applyDecorators`로 하나로 합칠 수 있다.
+여러 데코레이터를 자주 함께 사용하는 패턴이 있다면, [`applyDecorators`](../references/decorators.md#applydecoratorsdecorators)로 하나로 합칠 수 있다.
 
 ```typescript
 import { applyDecorators, UseGuards, SetMetadata } from '@nestjs/common';
@@ -213,7 +214,7 @@ export function Auth(...roles: string[]) {
 adminOnly() { ... }
 ```
 
-> **주의:**: `applyDecorators`는 **메서드 데코레이터**만 합성할 수 있다. 클래스 데코레이터(`@Controller()`, `@Module()` 등)나 파라미터 데코레이터(`@Body()`, `@Param()` 등)는 합성 대상이 아니다.
+> **주의:**: [`applyDecorators`](../references/decorators.md#applydecoratorsdecorators)는 **메서드 데코레이터**만 합성할 수 있다. 클래스 데코레이터([`@Controller()`](../references/decorators.md#controllerprefix), [`@Module()`](../references/decorators.md#moduleoptions) 등)나 파라미터 데코레이터([`@Body()`](../references/decorators.md#bodykey), [`@Param()`](../references/decorators.md#paramkey) 등)는 합성 대상이 아니다.
 
 ---
 
@@ -271,7 +272,7 @@ export class ExampleController {
 }
 ```
 
-> **팁:**: `@User()`의 `data` 파라미터에 아무것도 안 넣으면 `undefined`가 되어 전체 `user` 객체가 반환된다. `'email'`이나 `'id'` 같은 문자열을 넣으면 해당 필드의 값만 반환된다. 이 패턴은 NestJS 내장 `@Param()`, `@Query()`와 동일한 방식이다.
+> **팁:**: `@User()`의 `data` 파라미터에 아무것도 안 넣으면 `undefined`가 되어 전체 `user` 객체가 반환된다. `'email'`이나 `'id'` 같은 문자열을 넣으면 해당 필드의 값만 반환된다. 이 패턴은 NestJS 내장 [`@Param()`](../references/decorators.md#paramkey), [`@Query()`](../references/decorators.md#querykey)와 동일한 방식이다.
 
 ---
 
@@ -536,7 +537,7 @@ export class SimpleAuthGuard implements CanActivate {
 
 ### Controller에 @CurrentUser() 적용하여 코드 간결화
 
-이제 블로그 API의 각 컨트롤러에서 `@Req() req`로 직접 `req.user`에 접근하던 코드를 `@CurrentUser()`로 교체한다.
+이제 블로그 API의 각 컨트롤러에서 [`@Req() req`](../references/decorators.md#req-res)로 직접 `req.user`에 접근하던 코드를 `@CurrentUser()`로 교체한다.
 
 #### PostsController 리팩토링
 
@@ -773,7 +774,7 @@ export class PostsController {
 |------|--------|-------|
 | 타입 안전성 | `(req as any).user.id` 타입 단언 필요 | `@CurrentUser('id') userId: number` |
 | 코드 중복 | 매 메서드마다 `req.user.id` 추출 | 데코레이터 한 줄로 해결 |
-| Express 의존성 | `@Req() req: Request` - Express에 종속 | Express 타입 불필요 |
+| Express 의존성 | [`@Req() req: Request`](../references/decorators.md#req-res) - Express에 종속 | Express 타입 불필요 |
 | 가독성 | 메서드 본문에 데이터 추출 로직 섞임 | 파라미터 선언에서 명확히 표현 |
 
 ---
@@ -822,9 +823,9 @@ src/
 
 | 데코레이터 유형 | 핵심 함수 | 용도 | 블로그 API 적용 |
 |-----------------|-----------|------|-----------------|
-| 파라미터 데코레이터 | `createParamDecorator` | 요청에서 데이터 추출 | `@CurrentUser()` |
+| 파라미터 데코레이터 | [`createParamDecorator`](../references/decorators.md#createparamdecoratorfactory) | 요청에서 데이터 추출 | `@CurrentUser()` |
 | 메타데이터 데코레이터 | `SetMetadata` | 라우트에 메타데이터 부착 | `@Public()`, `@Roles()` |
-| 합성 데코레이터 | `applyDecorators` | 여러 데코레이터를 하나로 | `@Auth()` (Swagger 도입 후 확장 예정) |
+| 합성 데코레이터 | [`applyDecorators`](../references/decorators.md#applydecoratorsdecorators) | 여러 데코레이터를 하나로 | `@Auth()` (Swagger 도입 후 확장 예정) |
 
 ### Phase 1~3 완료!
 

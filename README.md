@@ -111,6 +111,10 @@ NestJS를 **처음 배우는 초보자**를 위한 단계별 학습 로드맵입
 | [16](./docs/16-cqrs.md) | **CQRS** | 게시글 CQRS 리팩토링 |
 | [17](./docs/17-microservices.md) | **Microservices** | 알림 마이크로서비스 분리 |
 
+### Phase 8+: 확장 학습 (추가 예정)
+
+> 로드맵은 계속 확장될 수 있습니다. GraphQL, Docker, Redis, Kafka, CI/CD 등의 챕터가 추가될 예정입니다.
+
 ---
 
 ## 블로그 API 성장 과정
@@ -211,6 +215,7 @@ yarn run start:dev
 ### 4. 학습 시작
 
 [`docs/00-roadmap.md`](./docs/00-roadmap.md)를 열고 챕터 1부터 순서대로 진행하세요.
+ide(vscode)에서 보는 것보다 github에서 보는 것이 조금 더 가독성이 좋습니다.
 
 ---
 

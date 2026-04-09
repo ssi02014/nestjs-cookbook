@@ -1399,7 +1399,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 ### 교체 작업 체크리스트
 
 1. `APP_GUARD`로 `JwtAuthGuard`를 전역 등록 (섹션 9에서 완료)
-2. 각 컨트롤러에서 `@UseGuards(SimpleAuthGuard)` 제거 (전역이므로 불필요)
+2. 각 컨트롤러에서 [`@UseGuards(SimpleAuthGuard)`](../references/decorators.md#useguardsguards) 제거 (전역이므로 불필요)
 3. 인증이 필요 없는 라우트에 `@Public()` 추가
 4. `SimpleAuthGuard` 파일 삭제
 

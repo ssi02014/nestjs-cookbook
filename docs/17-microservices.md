@@ -1223,7 +1223,7 @@ async function bootstrap() {
 bootstrap();
 ```
 
-컨트롤러 단위로 적용하고 싶다면 `@UseFilters` 데코레이터를 사용한다.
+컨트롤러 단위로 적용하고 싶다면 [`@UseFilters`](../references/decorators.md#usefiltersfilters) 데코레이터를 사용한다.
 
 ```typescript
 // src/notifications/notifications-http.controller.ts

@@ -3,6 +3,7 @@
 > **이전 챕터 요약**: 챕터 1에서 블로그 API의 모듈 구조(UsersModule, PostsModule, CommentsModule, CommonModule)를 설계하고 뼈대를 만들었다. 이번 챕터에서는 각 모듈에 **Controller**를 추가하여 HTTP 요청을 받는 라우트를 정의한다.
 
 
+
 ## 목차
 
 - [1단계: 개념 학습](#1단계-개념-학습)
@@ -64,9 +65,9 @@ Controller를 건물의 **"안내 데스크"**라고 생각하면 쉽다.
 
 ---
 
-## @Controller() 데코레이터와 라우트 접두사
+## [@Controller()](../references/decorators.md#controllerprefix) 데코레이터와 라우트 접두사
 
-클래스 위에 `@Controller()` 데코레이터를 붙이면, NestJS는 그 클래스를 Controller로 인식한다. 괄호 안에 **라우트 접두사(prefix)**를 문자열로 전달할 수 있다.
+클래스 위에 [`@Controller()`](../references/decorators.md#controllerprefix) 데코레이터를 붙이면, NestJS는 그 클래스를 Controller로 인식한다. 괄호 안에 **라우트 접두사(prefix)**를 문자열로 전달할 수 있다.
 
 ```typescript
 // cats.controller.ts
@@ -90,12 +91,12 @@ export class CatsController {
 
 | 데코레이터 조합 | 실제 매핑되는 경로 |
 |---|---|
-| `@Controller('cats')` + `@Get()` | `GET /cats` |
-| `@Controller('cats')` + `@Get('breed')` | `GET /cats/breed` |
-| `@Controller()` + `@Get('cats')` | `GET /cats` |
+| [`@Controller('cats')`](../references/decorators.md#controllerprefix) + [`@Get()`](../references/decorators.md#http-메서드-데코레이터) | `GET /cats` |
+| [`@Controller('cats')`](../references/decorators.md#controllerprefix) + [`@Get('breed')`](../references/decorators.md#http-메서드-데코레이터) | `GET /cats/breed` |
+| [`@Controller()`](../references/decorators.md#controllerprefix) + [`@Get('cats')`](../references/decorators.md#http-메서드-데코레이터) | `GET /cats` |
 
 > **라우트 접두사는 왜 쓰나요?**
-> 접두사 없이 `@Controller()` + `@Get('cats')` + `@Get('cats/breed')`처럼 매번 전체 경로를 적어도 동작한다. 하지만 접두사를 쓰면 반복을 줄이고, 이 컨트롤러가 어떤 리소스를 담당하는지 한눈에 알 수 있다.
+> 접두사 없이 [`@Controller()`](../references/decorators.md#controllerprefix) + [`@Get('cats')`](../references/decorators.md#http-메서드-데코레이터) + [`@Get('cats/breed')`](../references/decorators.md#http-메서드-데코레이터)처럼 매번 전체 경로를 적어도 동작한다. 하지만 접두사를 쓰면 반복을 줄이고, 이 컨트롤러가 어떤 리소스를 담당하는지 한눈에 알 수 있다.
 
 ### Controller는 반드시 Module에 등록해야 한다
 
@@ -122,12 +123,12 @@ NestJS는 모든 표준 HTTP 메서드에 대한 데코레이터를 제공한다
 
 | 데코레이터 | HTTP 메서드 | 용도 | 일상적 비유 |
 |---|---|---|---|
-| `@Get()` | GET | 리소스 조회 | "이 정보 좀 보여줘" |
-| `@Post()` | POST | 리소스 생성 | "이걸 새로 만들어줘" |
-| `@Put()` | PUT | 리소스 전체 수정 | "이걸 통째로 바꿔줘" |
-| `@Patch()` | PATCH | 리소스 부분 수정 | "이 부분만 고쳐줘" |
-| `@Delete()` | DELETE | 리소스 삭제 | "이걸 지워줘" |
-| `@All()` | 모든 메서드 | 모든 HTTP 메서드 처리 | "뭐든 다 받을게" |
+| [`@Get()`](../references/decorators.md#http-메서드-데코레이터) | GET | 리소스 조회 | "이 정보 좀 보여줘" |
+| [`@Post()`](../references/decorators.md#http-메서드-데코레이터) | POST | 리소스 생성 | "이걸 새로 만들어줘" |
+| [`@Put()`](../references/decorators.md#http-메서드-데코레이터) | PUT | 리소스 전체 수정 | "이걸 통째로 바꿔줘" |
+| [`@Patch()`](../references/decorators.md#http-메서드-데코레이터) | PATCH | 리소스 부분 수정 | "이 부분만 고쳐줘" |
+| [`@Delete()`](../references/decorators.md#http-메서드-데코레이터) | DELETE | 리소스 삭제 | "이걸 지워줘" |
+| [`@All()`](../references/decorators.md#http-메서드-데코레이터) | 모든 메서드 | 모든 HTTP 메서드 처리 | "뭐든 다 받을게" |
 
 ```typescript
 // cats.controller.ts
@@ -183,9 +184,9 @@ findAll() {
 
 클라이언트가 서버에 요청을 보낼 때 데이터를 함께 전달하는 방법은 여러 가지다. NestJS는 각 방법에 대응하는 **전용 데코레이터**를 제공한다.
 
-### @Param() - URL 경로의 동적 파라미터
+### [@Param()](../references/decorators.md#paramkey) - URL 경로의 동적 파라미터
 
-URL 경로 안에 `:파라미터명` 형태로 동적 값을 포함할 수 있다. `@Param()` 데코레이터로 이 값을 꺼낸다.
+URL 경로 안에 `:파라미터명` 형태로 동적 값을 포함할 수 있다. [`@Param()`](../references/decorators.md#paramkey) 데코레이터로 이 값을 꺼낸다.
 
 ```typescript
 // cats.controller.ts
@@ -217,9 +218,9 @@ export class CatsController {
 }
 ```
 
-> **주의:**: `@Param('id')`로 꺼낸 값은 항상 **문자열(string)**이다. 숫자로 쓰려면 `+id` 또는 `parseInt(id)` 등으로 변환하거나, 나중에 배울 `ParseIntPipe`를 사용한다.
+> **주의:**: [`@Param('id')`](../references/decorators.md#paramkey)로 꺼낸 값은 항상 **문자열(string)**이다. 숫자로 쓰려면 `+id` 또는 `parseInt(id)` 등으로 변환하거나, 나중에 배울 `ParseIntPipe`를 사용한다.
 
-### @Query() - URL 쿼리 문자열
+### [@Query()](../references/decorators.md#querykey) - URL 쿼리 문자열
 
 URL 뒤에 `?key=value` 형태로 붙는 데이터를 추출한다. 주로 목록 조회 시 검색 조건, 페이지네이션 등에 사용한다.
 
@@ -248,7 +249,7 @@ export class CatsController {
 }
 ```
 
-### @Body() - 요청 본문 (Request Body)
+### [@Body()](../references/decorators.md#bodykey) - 요청 본문 (Request Body)
 
 `POST`, `PUT`, `PATCH` 요청에서 전송되는 데이터 본문을 추출한다. 보통 JSON 형식으로 전달되며, **DTO(Data Transfer Object)**와 함께 사용한다.
 
@@ -287,7 +288,7 @@ export class CatsController {
 > **왜 DTO에 interface가 아닌 class를 쓰나요?**
 > TypeScript의 interface는 컴파일 후 사라져서 런타임에 사용할 수 없다. 반면 class는 컴파일 후에도 남아 있어서, NestJS의 Pipe(유효성 검사)나 Swagger(API 문서화)에서 활용할 수 있다. NestJS 공식 문서에서도 DTO에 class를 사용하는 것을 권장한다.
 
-### @Headers() - 요청 헤더
+### [@Headers()](../references/decorators.md#headerskey) - 요청 헤더
 
 HTTP 요청의 헤더 값을 추출한다.
 
@@ -315,15 +316,15 @@ export class CatsController {
 
 | NestJS 데코레이터 | 추출 대상 | Express 동등 표현 |
 |---|---|---|
-| `@Req()` / `@Request()` | 요청 객체 전체 | `req` |
-| `@Res()` / `@Response()` | 응답 객체 전체 | `res` |
-| `@Param(key?)` | URL 경로 파라미터 | `req.params` / `req.params[key]` |
-| `@Query(key?)` | 쿼리 파라미터 | `req.query` / `req.query[key]` |
-| `@Body(key?)` | 요청 본문 | `req.body` / `req.body[key]` |
-| `@Headers(name?)` | 요청 헤더 | `req.headers` / `req.headers[name]` |
-| `@Ip()` | 클라이언트 IP | `req.ip` |
+| [`@Req()`](../references/decorators.md#req-res) / [`@Request()`](../references/decorators.md#req-res) | 요청 객체 전체 | `req` |
+| [`@Res()`](../references/decorators.md#req-res) / [`@Response()`](../references/decorators.md#req-res) | 응답 객체 전체 | `res` |
+| [`@Param(key?)`](../references/decorators.md#paramkey) | URL 경로 파라미터 | `req.params` / `req.params[key]` |
+| [`@Query(key?)`](../references/decorators.md#querykey) | 쿼리 파라미터 | `req.query` / `req.query[key]` |
+| [`@Body(key?)`](../references/decorators.md#bodykey) | 요청 본문 | `req.body` / `req.body[key]` |
+| [`@Headers(name?)`](../references/decorators.md#http-메서드-데코레이터) | 요청 헤더 | `req.headers` / `req.headers[name]` |
+| [`@Ip()`](../references/decorators.md#ip) | 클라이언트 IP | `req.ip` |
 | `@Session()` | 세션 객체 | `req.session` |
-| `@HostParam()` | 호스트 파라미터 | `req.hosts` |
+| [`@HostParam()`](../references/decorators.md#hostparamkey) | 호스트 파라미터 | `req.hosts` |
 
 ---
 
@@ -360,7 +361,7 @@ export class CatsController {
 }
 ```
 
-### 방식 2: 라이브러리 특정 방식 (@Res)
+### 방식 2: 라이브러리 특정 방식 ([@Res](../references/decorators.md#req-res))
 
 Express의 `Response` 객체를 직접 사용하여 응답을 세밀하게 제어할 수 있다.
 
@@ -388,7 +389,7 @@ export class CatsController {
 }
 ```
 
-> **주의:**: `@Res()`를 사용하면 NestJS의 표준 응답 처리(인터셉터 등)가 **비활성화**된다. 표준 방식과 함께 쓰고 싶다면 `@Res({ passthrough: true })`를 사용한다.
+> **주의:**: [`@Res()`](../references/decorators.md#req-res)를 사용하면 NestJS의 표준 응답 처리(인터셉터 등)가 **비활성화**된다. 표준 방식과 함께 쓰고 싶다면 [`@Res({ passthrough: true })`](../references/decorators.md#req-res)를 사용한다.
 
 ```typescript
 @Get()
@@ -400,15 +401,15 @@ findAll(@Res({ passthrough: true }) res: Response) {
 ```
 
 > **초보자에게 추천하는 방식은?**
-> 특별한 이유가 없다면 **표준 방식(return)**을 사용하자. 코드가 간결하고, NestJS의 인터셉터와 예외 필터 등 다양한 기능과 잘 연동된다. `@Res()`는 파일 다운로드, 스트리밍 등 특수한 상황에서만 사용하는 것이 좋다.
+> 특별한 이유가 없다면 **표준 방식(return)**을 사용하자. 코드가 간결하고, NestJS의 인터셉터와 예외 필터 등 다양한 기능과 잘 연동된다. [`@Res()`](../references/decorators.md#req-res)는 파일 다운로드, 스트리밍 등 특수한 상황에서만 사용하는 것이 좋다.
 
 ---
 
-## @HttpCode, @Header, @Redirect
+## [@HttpCode](../references/decorators.md#httpcodestatuscode), @Header, [@Redirect](../references/decorators.md#redirecturl-statuscode)
 
-### @HttpCode() - 상태 코드 변경
+### [@HttpCode()](../references/decorators.md#httpcodestatuscode) - 상태 코드 변경
 
-기본적으로 `GET`은 `200`, `POST`는 `201`을 반환한다. `@HttpCode()` 데코레이터로 이 기본값을 변경할 수 있다.
+기본적으로 `GET`은 `200`, `POST`는 `201`을 반환한다. [`@HttpCode()`](../references/decorators.md#httpcodestatuscode) 데코레이터로 이 기본값을 변경할 수 있다.
 
 ```typescript
 // cats.controller.ts
@@ -444,7 +445,7 @@ export class CatsController {
 
 ### @Header() - 응답 헤더 설정
 
-`@Header()` 데코레이터로 커스텀 응답 헤더를 추가할 수 있다.
+[`@Header()`](../references/decorators.md#http-메서드-데코레이터) 데코레이터로 커스텀 응답 헤더를 추가할 수 있다.
 
 ```typescript
 // cats.controller.ts
@@ -461,9 +462,9 @@ export class CatsController {
 }
 ```
 
-### @Redirect() - 리다이렉트
+### [@Redirect()](../references/decorators.md#redirecturl-statuscode) - 리다이렉트
 
-`@Redirect()` 데코레이터로 클라이언트를 다른 URL로 이동시킬 수 있다.
+[`@Redirect()`](../references/decorators.md#redirecturl-statuscode) 데코레이터로 클라이언트를 다른 URL로 이동시킬 수 있다.
 
 ```typescript
 // cats.controller.ts
@@ -1201,14 +1202,14 @@ src/
 
 | 개념 | 데코레이터/키워드 | 설명 |
 |---|---|---|
-| 컨트롤러 선언 | `@Controller('prefix')` | 클래스를 컨트롤러로 등록, 라우트 접두사 지정 |
-| HTTP 메서드 | `@Get()`, `@Post()`, `@Patch()`, `@Delete()` 등 | 요청 메서드별 핸들러 지정 |
-| 라우트 파라미터 | `@Param('key')` | URL 경로의 동적 값 추출 (`:id`) |
-| 쿼리 파라미터 | `@Query('key')` | 쿼리 문자열 값 추출 (`?key=value`) |
-| 요청 본문 | `@Body()` | 요청 본문 추출, DTO와 함께 사용 |
-| 요청 헤더 | `@Headers('name')` | HTTP 요청 헤더 값 추출 |
-| 상태 코드 | `@HttpCode(204)` | 응답 상태 코드 지정 |
-| 헤더 설정 | `@Header('key', 'value')` | 응답 헤더 추가 |
-| 리다이렉트 | `@Redirect('url', 301)` | URL 리다이렉트 |
+| 컨트롤러 선언 | [`@Controller('prefix')`](../references/decorators.md#controllerprefix) | 클래스를 컨트롤러로 등록, 라우트 접두사 지정 |
+| HTTP 메서드 | [`@Get()`](../references/decorators.md#http-메서드-데코레이터), [`@Post()`](../references/decorators.md#http-메서드-데코레이터), [`@Patch()`](../references/decorators.md#http-메서드-데코레이터), [`@Delete()`](../references/decorators.md#http-메서드-데코레이터) 등 | 요청 메서드별 핸들러 지정 |
+| 라우트 파라미터 | [`@Param('key')`](../references/decorators.md#paramkey) | URL 경로의 동적 값 추출 (`:id`) |
+| 쿼리 파라미터 | [`@Query('key')`](../references/decorators.md#querykey) | 쿼리 문자열 값 추출 (`?key=value`) |
+| 요청 본문 | [`@Body()`](../references/decorators.md#bodykey) | 요청 본문 추출, DTO와 함께 사용 |
+| 요청 헤더 | [`@Headers('name')`](../references/decorators.md#http-메서드-데코레이터) | HTTP 요청 헤더 값 추출 |
+| 상태 코드 | [`@HttpCode(204)`](../references/decorators.md#httpcodestatuscode) | 응답 상태 코드 지정 |
+| 헤더 설정 | [`@Header('key', 'value')`](../references/decorators.md#http-메서드-데코레이터) | 응답 헤더 추가 |
+| 리다이렉트 | [`@Redirect('url', 301)`](../references/decorators.md#redirecturl-statuscode) | URL 리다이렉트 |
 | 비동기 처리 | `async/await`, `Observable` | 비동기 요청 처리 |
-| 응답 방식 | `return` (표준) / `@Res()` (Express) | 표준 방식 권장 |
+| 응답 방식 | `return` (표준) / [`@Res()`](../references/decorators.md#req-res) (Express) | 표준 방식 권장 |
