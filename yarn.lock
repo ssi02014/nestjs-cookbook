@@ -4762,7 +4762,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-util@npm:30.3.0":
+"jest-util@npm:30.3.0, jest-util@npm:^30.3.0":
   version: 30.3.0
   resolution: "jest-util@npm:30.3.0"
   dependencies:
@@ -5421,6 +5421,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.2.2"
     globals: "npm:^17.0.0"
     jest: "npm:^30.0.0"
+    jest-util: "npm:^30.3.0"
     prettier: "npm:^3.4.2"
     reflect-metadata: "npm:^0.2.2"
     rxjs: "npm:^7.8.1"
