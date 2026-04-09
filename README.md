@@ -1,6 +1,6 @@
 <!--배너-->
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=E0234E&height=200&section=header&text=NestJS%20Study&fontSize=60&fontColor=ffffff&fontAlignY=38&desc=무료로%20배우는%20NestJS%20학습%20저장소&descAlignY=58&descSize=20" width="100%" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=E0234E&height=200&section=header&text=NestJS%20Cookbook&fontSize=60&fontColor=ffffff&fontAlignY=38&desc=무료로%20배우는%20NestJS%20학습%20저장소&descAlignY=58&descSize=20" width="100%" />
 </div>
 
 <br/>
@@ -319,6 +319,38 @@ Client Response
 - 각 에이전트가 NestJS 공식 문서를 참조하여 내용 검증
 - 챕터 간 블로그 API의 연속성과 일관성 유지
 - 초보자 관점에서 설명의 난이도와 깊이를 조절
+
+---
+
+## AI로 나만의 쿡북 만들기
+
+이 저장소는 **그대로 따라가는 교재**이기도 하지만, **AI를 활용해 자유롭게 확장하는 베이스캠프**이기도 합니다.
+
+Fork 한 뒤 Claude Code, ChatGPT, Cursor 등 AI 도구와 함께 본인 입맛대로 발전시켜 보세요.
+
+### 확장 아이디어
+
+| 방향 | 예시 |
+|------|------|
+| **챕터 추가** | GraphQL, Docker, Redis, Kafka, CI/CD 등 Phase 8+ 직접 작성 |
+| **블로그 API 교체** | 블로그 대신 쇼핑몰, 커뮤니티, TODO 앱으로 바꿔 처음부터 재구성 |
+| **언어 변경** | 한국어 문서를 영어나 다른 언어로 번역 |
+| **예제 심화** | 각 챕터에 고급 예제, 실무 패턴, 트러블슈팅 섹션 추가 |
+| **레퍼런스 확장** | `docs/references/`에 RxJS, CLI 명령어, 환경 설정 등 참고 문서 추가 |
+| **난이도 조정** | 설명을 더 쉽게 풀거나, 심화 내용을 추가하거나 |
+
+### AI 활용 예시
+
+```
+"챕터 10의 블로그 API를 SQLite 대신 PostgreSQL로 바꿔줘"
+"GraphQL 챕터를 이 저장소의 문서 형식에 맞게 새로 작성해줘"
+"챕터 5 Pipe 섹션에 실무에서 자주 쓰는 커스텀 파이프 예제를 추가해줘"
+"영어 학습자를 위해 01-module.md를 영문으로 번역해줘"
+```
+
+이 저장소의 문서 구조와 규칙은 `CLAUDE.md`에 정리되어 있어, AI가 기존 스타일을 그대로 유지하면서 내용을 추가하거나 변경할 수 있습니다.
+
+> **이 저장소는 완성품이 아니라 출발점입니다.** 여러분만의 NestJS 쿡북으로 자유롭게 발전시켜 주세요.
 
 ---
 
