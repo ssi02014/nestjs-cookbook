@@ -25,10 +25,11 @@
 13. [3-2. 글로벌 필터 등록](#3-2-글로벌-필터-등록)
 14. [3-3. PostsService에서 예외 활용](#3-3-postsservice에서-예외-활용)
 15. [3-4. 인터셉터의 성공 응답과 짝을 이루는 에러 응답](#3-4-인터셉터의-성공-응답과-짝을-이루는-에러-응답)
+16. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
-16. [정리](#정리)
-17. [다음 챕터 예고](#다음-챕터-예고)
+17. [정리](#정리)
+18. [다음 챕터 예고](#다음-챕터-예고)
 
 ---
 
@@ -677,30 +678,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
 이제 실제 블로그 API에 Exception Filter를 적용한다. 챕터 7에서 만든 `TransformInterceptor`가 **성공 응답**을 래핑했다면, 이번에 만드는 `HttpExceptionFilter`는 **에러 응답**을 래핑한다. 둘이 짝을 이루어 **일관된 API 응답 포맷**을 완성한다.
 
-### 프로젝트 구조
-
-```
-src/
-├── app.module.ts                    ← APP_FILTER + APP_INTERCEPTOR 등록
-├── common/
-│   ├── common.module.ts
-│   ├── common.service.ts
-│   ├── middleware/
-│   ├── dto/
-│   ├── data/
-│   ├── enums/
-│   ├── decorators/
-│   ├── guards/
-│   ├── interceptors/
-│   └── filters/
-│       └── http-exception.filter.ts ← [이번 챕터 추가]
-├── users/
-├── posts/
-└── comments/
-```
-
----
-
 ### 3-1. HttpExceptionFilter 작성
 
 블로그 API의 에러 응답을 `{ success: false, error: { statusCode, message, path, timestamp } }` 형태로 통일하는 필터다.
@@ -1130,6 +1107,30 @@ GET /posts/abc
 ```
 
 > **팁:** `ParseIntPipe`가 던지는 `BadRequestException`도 우리가 만든 HttpExceptionFilter가 잡아서 동일한 에러 포맷으로 응답한다. Pipe, Guard 등 어디에서 예외가 발생하든 항상 같은 포맷이 보장된다.
+
+---
+
+## 프로젝트 구조
+
+```
+src/
+├── app.module.ts                    ← APP_FILTER + APP_INTERCEPTOR 등록
+├── common/
+│   ├── common.module.ts
+│   ├── common.service.ts
+│   ├── middleware/
+│   ├── dto/
+│   ├── data/
+│   ├── enums/
+│   ├── decorators/
+│   ├── guards/
+│   ├── interceptors/
+│   └── filters/
+│       └── http-exception.filter.ts ← [이번 챕터 추가]
+├── users/
+├── posts/
+└── comments/
+```
 
 ---
 

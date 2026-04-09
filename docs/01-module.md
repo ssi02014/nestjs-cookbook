@@ -21,10 +21,11 @@
 10. [블로그 프로젝트 모듈 구조 설계](#10-블로그-프로젝트-모듈-구조-설계)
 11. [모듈 생성하기](#11-모듈-생성하기)
 12. [완성된 모듈 구조 확인](#12-완성된-모듈-구조-확인)
+13. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
-13. [정리](#정리)
-14. [다음 챕터 예고](#다음-챕터-예고)
+14. [정리](#정리)
+15. [다음 챕터 예고](#다음-챕터-예고)
 
 ---
 
@@ -1000,6 +1001,31 @@ src/
 |-----------|------|
 | Chapter 2 - Controller | 각 모듈의 컨트롤러에 HTTP 라우트 추가 |
 | Chapter 3 - Provider & DI | 각 모듈의 서비스에 비즈니스 로직 구현 |
+
+---
+
+## 프로젝트 구조
+
+```
+src/
+├── main.ts
+├── app.module.ts              ← CommonModule, UsersModule, PostsModule, CommentsModule 등록
+├── common/
+│   ├── common.module.ts       ← [이번 챕터 추가]
+│   └── common.service.ts      ← [이번 챕터 추가]
+├── users/
+│   ├── users.module.ts        ← [이번 챕터 추가]
+│   ├── users.controller.ts    ← 스텁
+│   └── users.service.ts       ← 스텁
+├── posts/
+│   ├── posts.module.ts        ← [이번 챕터 추가]
+│   ├── posts.controller.ts    ← 스텁
+│   └── posts.service.ts       ← 스텁
+└── comments/
+    ├── comments.module.ts     ← [이번 챕터 추가]
+    ├── comments.controller.ts ← 스텁
+    └── comments.service.ts    ← 스텁
+```
 
 ---
 

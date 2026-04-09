@@ -7,33 +7,34 @@
 ## 목차
 
 ### 1단계: 개념 학습
-1. [Controller란 무엇인가](#controller란-무엇인가)
-2. [@Controller() 데코레이터와 라우트 접두사](#controller-데코레이터와-라우트-접두사)
-3. [HTTP 메서드 데코레이터](#http-메서드-데코레이터)
-4. [요청 데이터 추출](#요청-데이터-추출)
-5. [응답 처리](#응답-처리)
-6. [@HttpCode, @Header, @Redirect](#httpcode-header-redirect)
-7. [비동기 처리](#비동기-처리)
+1. [Controller란 무엇인가](#1-controller란-무엇인가)
+2. [@Controller() 데코레이터와 라우트 접두사](#2-controller-데코레이터와-라우트-접두사)
+3. [HTTP 메서드 데코레이터](#3-http-메서드-데코레이터)
+4. [요청 데이터 추출](#4-요청-데이터-추출)
+5. [응답 처리](#5-응답-처리)
+6. [@HttpCode, @Header, @Redirect](#6-httpcode-header-redirect)
+7. [비동기 처리](#7-비동기-처리)
 
 ### 2단계: 기본 예제
-8. [CatsController CRUD 예제](#catscontroller-crud-예제)
-9. [curl로 API 테스트하기](#curl로-api-테스트하기)
+8. [CatsController CRUD 예제](#8-catscontroller-crud-예제)
+9. [curl로 API 테스트하기](#9-curl로-api-테스트하기)
 
 ### 3단계: 블로그 API 적용
-10. [UsersController](#userscontroller)
-11. [PostsController](#postscontroller)
-12. [CommentsController](#commentscontroller)
-13. [모듈에 컨트롤러 등록](#모듈에-컨트롤러-등록)
+10. [UsersController](#10-userscontroller)
+11. [PostsController](#11-postscontroller)
+12. [CommentsController](#12-commentscontroller)
+13. [모듈에 컨트롤러 등록](#13-모듈에-컨트롤러-등록)
+14. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
-14. [정리](#정리)
-15. [다음 챕터 예고](#다음-챕터-예고)
+15. [정리](#정리)
+16. [다음 챕터 예고](#다음-챕터-예고)
 
 ---
 
 # 1단계: 개념 학습
 
-## Controller란 무엇인가
+## 1. Controller란 무엇인가
 
 웹 애플리케이션에서 클라이언트(브라우저, 앱 등)가 서버에 요청을 보내면, 누군가가 그 요청을 받아서 처리해야 한다. NestJS에서 그 역할을 하는 것이 바로 **Controller**다.
 
@@ -70,7 +71,7 @@ Controller를 건물의 **"안내 데스크"**라고 생각하면 쉽다.
 
 ---
 
-## [@Controller()](references/decorators.md#controllerprefix) 데코레이터와 라우트 접두사
+## 2. [@Controller()](references/decorators.md#controllerprefix) 데코레이터와 라우트 접두사
 
 클래스 위에 [`@Controller()`](references/decorators.md#controllerprefix) 데코레이터를 붙이면, NestJS는 그 클래스를 Controller로 인식한다. 괄호 안에 **라우트 접두사(prefix)**를 문자열로 전달할 수 있다.
 
@@ -120,7 +121,7 @@ export class CatsModule {}
 
 ---
 
-## HTTP 메서드 데코레이터
+## 3. HTTP 메서드 데코레이터
 
 웹에서 서버에 요청을 보낼 때는 **HTTP 메서드**라는 것을 사용한다. "무엇을 하고 싶은지"를 나타내는 동사라고 생각하면 된다.
 
@@ -222,7 +223,7 @@ export class ApiController {
 
 ---
 
-## 요청 데이터 추출
+## 4. 요청 데이터 추출
 
 클라이언트가 서버에 요청을 보낼 때 데이터를 함께 전달하는 방법은 여러 가지다. NestJS는 각 방법에 대응하는 **전용 데코레이터**를 제공한다.
 
@@ -370,7 +371,7 @@ export class CatsController {
 
 ---
 
-## 응답 처리
+## 5. 응답 처리
 
 NestJS에서 클라이언트에게 응답을 보내는 방법은 크게 두 가지가 있다.
 
@@ -447,7 +448,7 @@ findAll(@Res({ passthrough: true }) res: Response) {
 
 ---
 
-## [@HttpCode](references/decorators.md#httpcodestatuscode), @Header, [@Redirect](references/decorators.md#redirecturl-statuscode)
+## 6. [@HttpCode](references/decorators.md#httpcodestatuscode), @Header, [@Redirect](references/decorators.md#redirecturl-statuscode)
 
 ### [@HttpCode()](references/decorators.md#httpcodestatuscode) - 상태 코드 변경
 
@@ -536,7 +537,7 @@ export class CatsController {
 
 ---
 
-## 비동기 처리
+## 7. 비동기 처리
 
 실제 애플리케이션에서는 데이터베이스 조회, 외부 API 호출 등 시간이 걸리는 작업을 처리해야 한다. NestJS의 핸들러 메서드는 `async/await`를 완벽하게 지원한다.
 
@@ -585,7 +586,7 @@ export class CatsController {
 
 # 2단계: 기본 예제
 
-## CatsController CRUD 예제
+## 8. CatsController CRUD 예제
 
 1단계에서 배운 개념들을 모두 활용하여, 고양이(Cat) 리소스에 대한 CRUD(Create, Read, Update, Delete) 컨트롤러를 만들어 보자.
 
@@ -731,7 +732,7 @@ export class AppModule {}
 
 ---
 
-## curl로 API 테스트하기
+## 9. curl로 API 테스트하기
 
 서버를 `npm run start:dev`로 실행한 뒤, 터미널에서 다음 명령어로 API를 테스트할 수 있다.
 
@@ -777,34 +778,7 @@ curl -X DELETE http://localhost:3000/cats/1 -v
 
 ---
 
-## 프로젝트 구조
-
-```
-src/
-├── app.module.ts
-├── main.ts
-├── common/
-├── users/
-│   ├── dto/
-│   │   └── create-user.dto.ts     ← [이번 챕터 추가]
-│   ├── users.controller.ts        ← [이번 챕터 추가]
-│   └── users.module.ts
-├── posts/
-│   ├── dto/
-│   │   ├── create-post.dto.ts     ← [이번 챕터 추가]
-│   │   └── update-post.dto.ts     ← [이번 챕터 추가]
-│   ├── posts.controller.ts        ← [이번 챕터 추가]
-│   └── posts.module.ts
-└── comments/
-    ├── dto/
-    │   └── create-comment.dto.ts  ← [이번 챕터 추가]
-    ├── comments.controller.ts     ← [이번 챕터 추가]
-    └── comments.module.ts
-```
-
----
-
-## UsersController
+## 10. UsersController
 
 사용자 관련 엔드포인트를 정의한다.
 
@@ -885,7 +859,7 @@ curl http://localhost:3000/users/1
 
 ---
 
-## PostsController
+## 11. PostsController
 
 게시글 관련 CRUD 전체를 정의한다.
 
@@ -1068,7 +1042,7 @@ curl -X DELETE http://localhost:3000/posts/1 -v
 
 ---
 
-## CommentsController
+## 12. CommentsController
 
 댓글은 게시글에 종속된 리소스이므로, URL 구조가 조금 특별하다. 댓글 작성과 조회는 **게시글 하위 경로**(`/posts/:postId/comments`)로, 삭제는 **댓글 자체 경로**(`/comments/:id`)로 설계한다.
 
@@ -1184,7 +1158,7 @@ curl -X DELETE http://localhost:3000/comments/1 -v
 
 ---
 
-## 모듈에 컨트롤러 등록
+## 13. 모듈에 컨트롤러 등록
 
 각 컨트롤러를 해당 모듈에 등록한다. 챕터 1에서 만든 모듈 구조를 그대로 이어받는다.
 
@@ -1234,31 +1208,31 @@ import { CommentsModule } from './comments/comments.module';
 export class AppModule {}
 ```
 
-### 최종 폴더 구조
+---
+
+## 프로젝트 구조
 
 ```
 src/
 ├── app.module.ts
 ├── main.ts
-│
+├── common/
 ├── users/
-│   ├── users.module.ts
-│   ├── users.controller.ts
-│   └── dto/
-│       └── create-user.dto.ts
-│
+│   ├── dto/
+│   │   └── create-user.dto.ts     ← [이번 챕터 추가]
+│   ├── users.controller.ts        ← [이번 챕터 추가]
+│   └── users.module.ts
 ├── posts/
-│   ├── posts.module.ts
-│   ├── posts.controller.ts
-│   └── dto/
-│       ├── create-post.dto.ts
-│       └── update-post.dto.ts
-│
+│   ├── dto/
+│   │   ├── create-post.dto.ts     ← [이번 챕터 추가]
+│   │   └── update-post.dto.ts     ← [이번 챕터 추가]
+│   ├── posts.controller.ts        ← [이번 챕터 추가]
+│   └── posts.module.ts
 └── comments/
-    ├── comments.module.ts
-    ├── comments.controller.ts
-    └── dto/
-        └── create-comment.dto.ts
+    ├── dto/
+    │   └── create-comment.dto.ts  ← [이번 챕터 추가]
+    ├── comments.controller.ts     ← [이번 챕터 추가]
+    └── comments.module.ts
 ```
 
 ---

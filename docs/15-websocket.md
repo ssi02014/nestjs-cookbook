@@ -21,10 +21,11 @@
 9. [블로그 API 적용: 실시간 댓글 알림](#9-블로그-api-적용-실시간-댓글-알림)
 10. [Redis Adapter (다중 서버 환경)](#10-redis-adapter-다중-서버-환경)
 11. [소켓 인증 미들웨어](#11-소켓-인증-미들웨어)
+12. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
-12. [정리](#정리)
-13. [다음 챕터 예고](#다음-챕터-예고)
+13. [정리](#정리)
+14. [다음 챕터 예고](#다음-챕터-예고)
 
 ---
 
@@ -600,27 +601,6 @@ export class RoomGateway {
 ```bash
 npm install @nestjs/websockets @nestjs/platform-socket.io
 npm install -D @types/socket.io
-```
-
-### 프로젝트 구조
-
-```
-src/
-├── app.module.ts
-├── main.ts
-├── common/ (챕터 9까지 누적)
-├── config/
-├── auth/
-├── users/
-├── posts/
-├── comments/
-│   └── comments.service.ts       ← BlogGateway 주입, 알림 전송 추가
-├── gateway/
-│   ├── gateway.module.ts         ← [이번 챕터 추가]
-│   └── blog.gateway.ts           ← [이번 챕터 추가] WebSocket Gateway
-
-public/
-└── blog-test.html                ← [이번 챕터 추가] 테스트용 HTML
 ```
 
 ### 9-1. Post Entity
@@ -1270,6 +1250,29 @@ handleJoinPostRoom(
 ```
 
 > **팁:** `client.disconnect(true)`를 호출하면 서버 측에서 연결을 강제로 끊는다. `true` 인자를 넘기면 소켓을 즉시 파기하며, 클라이언트에게는 `disconnect` 이벤트가 발생한다. 미인증 클라이언트는 반드시 이 방식으로 즉시 연결을 종료해야 한다.
+
+---
+
+## 프로젝트 구조
+
+```
+src/
+├── app.module.ts
+├── main.ts
+├── common/ (챕터 9까지 누적)
+├── config/
+├── auth/
+├── users/
+├── posts/
+├── comments/
+│   └── comments.service.ts       ← BlogGateway 주입, 알림 전송 추가
+├── gateway/
+│   ├── gateway.module.ts         ← [이번 챕터 추가]
+│   └── blog.gateway.ts           ← [이번 챕터 추가] WebSocket Gateway
+
+public/
+└── blog-test.html                ← [이번 챕터 추가] 테스트용 HTML
+```
 
 ---
 

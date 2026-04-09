@@ -27,10 +27,11 @@
 15. [Guard, Interceptor, Pipe 테스트](#15-guard-interceptor-pipe-테스트)
 16. [테스트 커버리지 설정](#16-테스트-커버리지-설정)
 17. [테스트 실행 명령어 정리](#17-테스트-실행-명령어-정리)
+18. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
-18. [정리](#정리)
-19. [다음 챕터 예고](#다음-챕터-예고)
+19. [정리](#정리)
+20. [다음 챕터 예고](#다음-챕터-예고)
 
 ---
 
@@ -1073,45 +1074,6 @@ describe('PostsService (통합 테스트)', () => {
 ---
 
 # 3단계: 블로그 API 적용
-
----
-
-## 프로젝트 구조
-
-테스트 파일은 테스트 대상 파일과 같은 폴더에 `.spec.ts` 확장자로 배치한다.
-
-```
-src/
-├── app.module.ts
-├── main.ts
-├── common/ (챕터 9까지 누적된 파일들)
-├── config/
-│   ├── database.config.ts
-│   ├── jwt.config.ts
-│   └── env.validation.ts
-├── auth/
-│   ├── auth.service.ts
-│   ├── auth.service.spec.ts       ← [이번 챕터 추가]
-│   └── ...
-├── users/
-│   ├── entities/
-│   │   └── user.entity.ts
-│   ├── users.service.ts
-│   ├── users.service.spec.ts      ← [이번 챕터 추가]
-│   └── ...
-├── posts/
-│   ├── entities/
-│   │   └── post.entity.ts
-│   ├── posts.service.ts
-│   ├── posts.service.spec.ts      ← [이번 챕터 추가]
-│   └── ...
-└── comments/
-    └── ...
-
-test/
-├── app.e2e-spec.ts                ← [이번 챕터 추가]
-└── jest-e2e.json
-```
 
 ---
 
@@ -2453,6 +2415,45 @@ Time:        2.341 s
 ```
 
 > **팁:** `npm run test:watch` 모드에서는 변경된 파일과 관련된 테스트만 자동으로 다시 실행한다. 개발하면서 실시간으로 테스트 결과를 확인할 수 있어 매우 편리하다. `p` 키를 눌러 파일 이름으로 필터링하거나, `t` 키를 눌러 테스트 이름으로 필터링할 수 있다.
+
+---
+
+## 프로젝트 구조
+
+테스트 파일은 테스트 대상 파일과 같은 폴더에 `.spec.ts` 확장자로 배치한다.
+
+```
+src/
+├── app.module.ts
+├── main.ts
+├── common/ (챕터 9까지 누적된 파일들)
+├── config/
+│   ├── database.config.ts
+│   ├── jwt.config.ts
+│   └── env.validation.ts
+├── auth/
+│   ├── auth.service.ts
+│   ├── auth.service.spec.ts       ← [이번 챕터 추가]
+│   └── ...
+├── users/
+│   ├── entities/
+│   │   └── user.entity.ts
+│   ├── users.service.ts
+│   ├── users.service.spec.ts      ← [이번 챕터 추가]
+│   └── ...
+├── posts/
+│   ├── entities/
+│   │   └── post.entity.ts
+│   ├── posts.service.ts
+│   ├── posts.service.spec.ts      ← [이번 챕터 추가]
+│   └── ...
+└── comments/
+    └── ...
+
+test/
+├── app.e2e-spec.ts                ← [이번 챕터 추가]
+└── jest-e2e.json
+```
 
 ---
 

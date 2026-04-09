@@ -21,10 +21,11 @@
 
 ### 3단계: 블로그 API 적용
 6. [블로그 API에 적용하기](#6-블로그-api에-적용하기)
+7. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
-7. [정리](#정리)
-8. [다음 챕터 예고](#다음-챕터-예고)
+8. [정리](#정리)
+9. [다음 챕터 예고](#다음-챕터-예고)
 
 ---
 
@@ -593,29 +594,7 @@ export class CacheInterceptor implements NestInterceptor {
 
 지금까지 배운 인터셉터를 블로그 API에 실제로 적용해보자. 이 챕터를 마치면 **모든 API 응답이 일관된 포맷**으로 반환된다.
 
-### 6-1. 파일 구조
-
-```
-src/
-├── app.module.ts                    ← APP_INTERCEPTOR 등록
-├── common/
-│   ├── common.module.ts
-│   ├── common.service.ts
-│   ├── middleware/
-│   ├── dto/
-│   ├── data/
-│   ├── enums/
-│   ├── decorators/
-│   ├── guards/
-│   └── interceptors/
-│       ├── transform.interceptor.ts ← [이번 챕터 추가]
-│       └── logging.interceptor.ts   ← [이번 챕터 추가]
-├── users/
-├── posts/
-└── comments/
-```
-
-### 6-2. TransformInterceptor 만들기
+### 6-1. TransformInterceptor 만들기
 
 모든 응답을 `{ success: true, data: ..., timestamp: ... }` 형태로 통일한다.
 
@@ -655,7 +634,7 @@ export class TransformInterceptor<T>
 }
 ```
 
-### 6-3. LoggingInterceptor 만들기
+### 6-2. LoggingInterceptor 만들기
 
 모든 요청의 메서드, URL, 컨트롤러명, 핸들러명, 처리 시간을 기록한다.
 
@@ -712,7 +691,7 @@ export class LoggingInterceptor implements NestInterceptor {
 
 > **팁:** `tap`에 객체 형태(`{ next, error }`)를 전달하면 성공과 에러를 각각 처리할 수 있다. 에러 로그도 함께 남기면 디버깅할 때 매우 유용하다.
 
-### 6-4. 글로벌 적용하기
+### 6-3. 글로벌 적용하기
 
 두 인터셉터를 `APP_INTERCEPTOR` 토큰으로 글로벌 등록한다.
 
@@ -748,7 +727,7 @@ export class AppModule {}
 
 > **팁:** 글로벌 인터셉터가 여러 개일 때 실행 순서가 중요하다. `providers` 배열에서 **먼저 등록된 인터셉터가 바깥쪽**에서 감싼다. 즉, `LoggingInterceptor`가 `TransformInterceptor`를 감싸므로, 로깅에는 래핑된 최종 응답이 아니라 전체 흐름이 기록된다.
 
-### 6-5. curl로 동작 확인
+### 6-4. curl로 동작 확인
 
 서버를 실행하고 실제로 확인해보자.
 
@@ -837,7 +816,7 @@ curl -s -X POST http://localhost:3000/posts \
 
 모든 엔드포인트의 응답이 동일한 형태로 통일되었고, 서버 콘솔에는 요청/응답 로그가 자동으로 기록된다.
 
-### 6-6. 컨트롤러 코드는 변경할 필요 없다!
+### 6-5. 컨트롤러 코드는 변경할 필요 없다!
 
 인터셉터의 가장 큰 장점은 **컨트롤러 코드를 전혀 수정하지 않아도 된다**는 것이다. 기존 컨트롤러는 그대로 둔다.
 
@@ -870,6 +849,30 @@ export class PostsController {
 ```
 
 컨트롤러가 반환하는 값이 무엇이든, `TransformInterceptor`가 자동으로 `{ success, data, timestamp }` 형태로 감싸준다.
+
+---
+
+## 프로젝트 구조
+
+```
+src/
+├── app.module.ts                    ← APP_INTERCEPTOR 등록
+├── common/
+│   ├── common.module.ts
+│   ├── common.service.ts
+│   ├── middleware/
+│   ├── dto/
+│   ├── data/
+│   ├── enums/
+│   ├── decorators/
+│   ├── guards/
+│   └── interceptors/
+│       ├── transform.interceptor.ts ← [이번 챕터 추가]
+│       └── logging.interceptor.ts   ← [이번 챕터 추가]
+├── users/
+├── posts/
+└── comments/
+```
 
 ---
 

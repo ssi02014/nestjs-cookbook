@@ -6,23 +6,24 @@
 ## 목차
 
 ### 1단계: 개념 학습
-1. [CQRS란?](#cqrs란)
-2. [왜 읽기와 쓰기를 분리할까?](#왜-읽기와-쓰기를-분리할까)
-3. [Command, Query, Event의 역할](#command-query-event의-역할)
-4. [@nestjs/cqrs 패키지 설치 및 핵심 구성요소](#nestjscqrs-패키지-설치-및-핵심-구성요소)
+1. [CQRS란?](#1-cqrs란)
+2. [왜 읽기와 쓰기를 분리할까?](#2-왜-읽기와-쓰기를-분리할까)
+3. [Command, Query, Event의 역할](#3-command-query-event의-역할)
+4. [@nestjs/cqrs 패키지 설치 및 핵심 구성요소](#4-nestjscqrs-패키지-설치-및-핵심-구성요소)
 
 ### 2단계: 기본 예제
-5. [기본 예제: Command + Handler](#기본-예제-command--handler)
-6. [기본 예제: Query + Handler](#기본-예제-query--handler)
-7. [기본 예제: Event + Handler](#기본-예제-event--handler)
-8. [Saga (이벤트 기반 워크플로우)](#saga-이벤트-기반-워크플로우)
+5. [기본 예제: Command + Handler](#5-기본-예제-command--handler)
+6. [기본 예제: Query + Handler](#6-기본-예제-query--handler)
+7. [기본 예제: Event + Handler](#7-기본-예제-event--handler)
+8. [Saga (이벤트 기반 워크플로우)](#8-saga-이벤트-기반-워크플로우)
 
 ### 3단계: 블로그 API 적용
-9. [실전: 블로그 PostsModule을 CQRS로 리팩토링](#실전-블로그-postsmodule을-cqrs로-리팩토링)
+9. [블로그 PostsModule을 CQRS로 리팩토링](#9-블로그-postsmodule을-cqrs로-리팩토링)
+10. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
-10. [정리](#정리)
-11. [다음 챕터 예고](#다음-챕터-예고)
+11. [정리](#정리)
+12. [다음 챕터 예고](#다음-챕터-예고)
 
 ---
 
@@ -30,7 +31,7 @@
 
 ---
 
-## CQRS란?
+## 1. CQRS란?
 
 **CQRS(Command Query Responsibility Segregation)**는 데이터의 **쓰기(Command)**와 **읽기(Query)**를 분리하는 아키텍처 패턴이다.
 
@@ -67,7 +68,7 @@ CQRS는 이를 분업하는 것과 같다:
 
 ---
 
-## 왜 읽기와 쓰기를 분리할까?
+## 2. 왜 읽기와 쓰기를 분리할까?
 
 ### 문제 상황
 
@@ -108,7 +109,7 @@ export class PostsService {
 
 ---
 
-## Command, Query, Event의 역할
+## 3. Command, Query, Event의 역할
 
 CQRS에서 사용하는 세 가지 핵심 개념을 정리한다.
 
@@ -158,7 +159,7 @@ CQRS에서 사용하는 세 가지 핵심 개념을 정리한다.
 
 ---
 
-## @nestjs/cqrs 패키지 설치 및 핵심 구성요소
+## 4. @nestjs/cqrs 패키지 설치 및 핵심 구성요소
 
 ### 설치
 
@@ -203,7 +204,7 @@ export class ExampleModule {}
 
 ---
 
-## 기본 예제: Command + Handler
+## 5. 기본 예제: Command + Handler
 
 가장 간단한 Command와 Handler를 만들어 보자.
 
@@ -263,7 +264,7 @@ export class ExampleController {
 
 ---
 
-## 기본 예제: Query + Handler
+## 6. 기본 예제: Query + Handler
 
 Query는 데이터를 **읽기만** 하고 상태를 변경하지 않는다.
 
@@ -323,7 +324,7 @@ export class ExampleController {
 
 ---
 
-## 기본 예제: Event + Handler
+## 7. 기본 예제: Event + Handler
 
 Event는 "이미 발생한 사건"을 나타내며, **한 이벤트에 여러 핸들러**가 반응할 수 있다.
 
@@ -405,7 +406,7 @@ export class SayHelloHandler implements ICommandHandler<SayHelloCommand> {
 
 ---
 
-## Saga (이벤트 기반 워크플로우)
+## 8. Saga (이벤트 기반 워크플로우)
 
 Saga는 **이벤트를 구독하여 새로운 Command를 자동 실행**하는 워크플로우다. "A가 일어나면 B를 실행하라"는 규칙을 선언적으로 정의할 수 있다.
 
@@ -471,58 +472,11 @@ Saga의 핵심 포인트:
 
 ---
 
-## 실전: 블로그 PostsModule을 CQRS로 리팩토링
+## 9. 블로그 PostsModule을 CQRS로 리팩토링
 
 이전 챕터에서 만들어 온 블로그 게시글 도메인을 CQRS 패턴으로 리팩토링한다. 기존의 `PostsService` 한 곳에 모여 있던 로직을 Command, Query, Event로 분리하는 것이 목표다.
 
 > **챕터 10 연결**: 이 섹션은 챕터 10에서 도입한 TypeORM + SQLite 환경을 그대로 이어받는다. 챕터 10에서 정의한 `Post` 엔티티([`@Entity()`](references/decorators.md#entitytablename) 데코레이터가 붙은 TypeORM 엔티티)와 `TypeOrmModule.forFeature([Post])`로 등록된 Repository를 Handler에서 직접 주입받아 사용한다. 별도의 인메모리 저장소를 만들지 않아도 된다.
-
-### 프로젝트 구조
-
-```
-src/
-├── app.module.ts
-├── main.ts
-├── common/ (챕터 9까지 누적)
-├── config/
-├── auth/
-├── users/
-├── gateway/
-├── comments/
-└── posts/                         ← CQRS 패턴으로 리팩토링
-    ├── commands/
-    │   ├── impl/
-    │   │   ├── create-post.command.ts   ← [이번 챕터 추가]
-    │   │   ├── update-post.command.ts   ← [이번 챕터 추가]
-    │   │   └── delete-post.command.ts   ← [이번 챕터 추가]
-    │   └── handlers/
-    │       ├── create-post.handler.ts   ← [이번 챕터 추가]
-    │       ├── update-post.handler.ts   ← [이번 챕터 추가]
-    │       └── delete-post.handler.ts   ← [이번 챕터 추가]
-    ├── queries/
-    │   ├── impl/
-    │   │   ├── get-post.query.ts        ← [이번 챕터 추가]
-    │   │   └── get-post-list.query.ts   ← [이번 챕터 추가]
-    │   └── handlers/
-    │       ├── get-post.handler.ts      ← [이번 챕터 추가]
-    │       └── get-post-list.handler.ts ← [이번 챕터 추가]
-    ├── events/
-    │   ├── impl/
-    │   │   ├── post-created.event.ts    ← [이번 챕터 추가]
-    │   │   ├── post-updated.event.ts    ← [이번 챕터 추가]
-    │   │   └── post-deleted.event.ts    ← [이번 챕터 추가]
-    │   └── handlers/
-    │       └── post-events.handler.ts   ← [이번 챕터 추가]
-    ├── sagas/
-    │   └── post.saga.ts                 ← [이번 챕터 추가]
-    ├── dto/
-    │   ├── create-post.dto.ts
-    │   └── update-post.dto.ts
-    ├── entities/
-    │   └── post.entity.ts
-    ├── posts.controller.ts
-    └── posts.module.ts                  ← CqrsModule import 추가
-```
 
 > **팁:** `commands/impl/`과 `commands/handlers/`를 분리하는 것이 NestJS CQRS의 일반적인 관례다. `impl`에는 데이터 클래스(Command, Query, Event)를, `handlers`에는 처리 로직을 배치한다.
 
@@ -1131,7 +1085,7 @@ export class PostsModule {}
 
 ---
 
-## Event Sourcing과 CQRS의 차이
+### Event Sourcing과 CQRS의 차이
 
 CQRS를 공부하다 보면 **Event Sourcing**이라는 용어가 자주 함께 등장한다. 둘은 궁합이 잘 맞아 함께 쓰이는 경우가 많지만, **별개의 독립적인 개념**이다.
 
@@ -1147,6 +1101,55 @@ CQRS를 공부하다 보면 **Event Sourcing**이라는 용어가 자주 함께 
 | 복잡도 | 중간 | 높음 |
 
 이 챕터에서 구현한 코드는 **순수 CQRS**다. TypeORM Repository에 현재 상태를 저장하며, Event Sourcing을 도입하지 않는다. Event Sourcing은 금융·감사 로그처럼 변경 이력 자체가 중요한 도메인에서 주로 고려한다.
+
+---
+
+## 프로젝트 구조
+
+```
+src/
+├── app.module.ts
+├── main.ts
+├── common/ (챕터 9까지 누적)
+├── config/
+├── auth/
+├── users/
+├── gateway/
+├── comments/
+└── posts/                         ← CQRS 패턴으로 리팩토링
+    ├── commands/
+    │   ├── impl/
+    │   │   ├── create-post.command.ts   ← [이번 챕터 추가]
+    │   │   ├── update-post.command.ts   ← [이번 챕터 추가]
+    │   │   └── delete-post.command.ts   ← [이번 챕터 추가]
+    │   └── handlers/
+    │       ├── create-post.handler.ts   ← [이번 챕터 추가]
+    │       ├── update-post.handler.ts   ← [이번 챕터 추가]
+    │       └── delete-post.handler.ts   ← [이번 챕터 추가]
+    ├── queries/
+    │   ├── impl/
+    │   │   ├── get-post.query.ts        ← [이번 챕터 추가]
+    │   │   └── get-post-list.query.ts   ← [이번 챕터 추가]
+    │   └── handlers/
+    │       ├── get-post.handler.ts      ← [이번 챕터 추가]
+    │       └── get-post-list.handler.ts ← [이번 챕터 추가]
+    ├── events/
+    │   ├── impl/
+    │   │   ├── post-created.event.ts    ← [이번 챕터 추가]
+    │   │   ├── post-updated.event.ts    ← [이번 챕터 추가]
+    │   │   └── post-deleted.event.ts    ← [이번 챕터 추가]
+    │   └── handlers/
+    │       └── post-events.handler.ts   ← [이번 챕터 추가]
+    ├── sagas/
+    │   └── post.saga.ts                 ← [이번 챕터 추가]
+    ├── dto/
+    │   ├── create-post.dto.ts
+    │   └── update-post.dto.ts
+    ├── entities/
+    │   └── post.entity.ts
+    ├── posts.controller.ts
+    └── posts.module.ts                  ← CqrsModule import 추가
+```
 
 ---
 

@@ -29,10 +29,11 @@
 17. [curl로 전체 플로우 테스트](#17-curl로-전체-플로우-테스트)
 18. [Refresh Token DB 저장 및 블랙리스트 구현 심화](#18-refresh-token-db-저장-및-블랙리스트-구현-심화)
 19. [보안 강화 - HTTPS와 httpOnly 쿠키](#19-보안-강화---https와-httponly-쿠키)
+20. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
-20. [정리](#정리)
-21. [다음 챕터 예고](#다음-챕터-예고)
+21. [정리](#정리)
+22. [다음 챕터 예고](#다음-챕터-예고)
 
 ---
 
@@ -676,36 +677,6 @@ signup(@Body() dto: SignupDto) {
 # 3단계: 블로그 API 적용
 
 > 이전 챕터들에서 만들어온 블로그 API에 실제 JWT 인증을 적용한다. 챕터 6에서 사용한 `SimpleAuthGuard`(헤더의 `x-user-id`를 확인하는 간이 가드)를 **진짜 JWT 인증**으로 교체하는 것이 목표다.
-
----
-
-## 프로젝트 구조
-
-```
-src/
-├── common/
-├── config/
-├── auth/
-│   ├── dto/
-│   │   ├── login.dto.ts              ← [이번 챕터 추가]
-│   │   └── signup.dto.ts             ← [이번 챕터 추가]
-│   ├── guards/
-│   │   ├── jwt-auth.guard.ts         ← [이번 챕터 추가]
-│   │   ├── jwt-refresh-auth.guard.ts ← [이번 챕터 추가]
-│   │   └── local-auth.guard.ts       ← [이번 챕터 추가]
-│   ├── strategies/
-│   │   ├── jwt.strategy.ts           ← [이번 챕터 추가]
-│   │   ├── jwt-refresh.strategy.ts   ← [이번 챕터 추가]
-│   │   └── local.strategy.ts         ← [이번 챕터 추가]
-│   ├── auth.controller.ts            ← [이번 챕터 추가]
-│   ├── auth.module.ts                ← [이번 챕터 추가]
-│   └── auth.service.ts               ← [이번 챕터 추가]
-├── users/
-│   └── entities/
-│       └── user.entity.ts            ← hashedRefreshToken 컬럼 추가
-├── posts/
-└── comments/
-```
 
 ---
 
@@ -1891,7 +1862,7 @@ curl -X POST http://localhost:3000/posts \
 
 ---
 
-## Refresh Token Rotation 보안 패턴
+### Refresh Token Rotation 보안 패턴
 
 이 블로그 API에 적용된 Refresh Token Rotation 패턴을 정리한다.
 
@@ -2172,6 +2143,36 @@ async logout(
 | 권장 환경 | 모바일 앱, 서버 간 통신 | 웹 브라우저 클라이언트 |
 
 > **결론**: 웹 프론트엔드(React, Vue 등)와 함께 사용할 경우 **httpOnly 쿠키 방식이 더 안전**하다. 모바일 앱이나 서버 간 통신에서는 Bearer 헤더 방식이 더 적합하다. 이 챕터의 블로그 API는 두 방식 모두 적용 가능하도록 설계되어 있다.
+
+---
+
+## 프로젝트 구조
+
+```
+src/
+├── common/
+├── config/
+├── auth/
+│   ├── dto/
+│   │   ├── login.dto.ts              ← [이번 챕터 추가]
+│   │   └── signup.dto.ts             ← [이번 챕터 추가]
+│   ├── guards/
+│   │   ├── jwt-auth.guard.ts         ← [이번 챕터 추가]
+│   │   ├── jwt-refresh-auth.guard.ts ← [이번 챕터 추가]
+│   │   └── local-auth.guard.ts       ← [이번 챕터 추가]
+│   ├── strategies/
+│   │   ├── jwt.strategy.ts           ← [이번 챕터 추가]
+│   │   ├── jwt-refresh.strategy.ts   ← [이번 챕터 추가]
+│   │   └── local.strategy.ts         ← [이번 챕터 추가]
+│   ├── auth.controller.ts            ← [이번 챕터 추가]
+│   ├── auth.module.ts                ← [이번 챕터 추가]
+│   └── auth.service.ts               ← [이번 챕터 추가]
+├── users/
+│   └── entities/
+│       └── user.entity.ts            ← hashedRefreshToken 컬럼 추가
+├── posts/
+└── comments/
+```
 
 ---
 

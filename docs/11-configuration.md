@@ -6,31 +6,31 @@
 ## 목차
 
 ### 1단계: 개념 학습
-1. [왜 환경 변수가 필요한가?](#왜-환경-변수가-필요한가)
-2. [@nestjs/config 패키지](#nestjsconfig-패키지)
-3. [.env 파일](#env-파일)
-4. [ConfigModule.forRoot() 옵션](#configmoduleforroot-옵션)
-5. [ConfigService 사용법](#configservice-사용법)
-6. [registerAs로 네임스페이스 설정](#registeras로-네임스페이스-설정)
-7. [환경 변수 유효성 검사](#환경-변수-유효성-검사)
+1. [왜 환경 변수가 필요한가?](#1-왜-환경-변수가-필요한가)
+2. [@nestjs/config 패키지](#2-nestjsconfig-패키지)
+3. [.env 파일](#3-env-파일)
+4. [ConfigModule.forRoot() 옵션](#4-configmoduleforroot-옵션)
+5. [ConfigService 사용법](#5-configservice-사용법)
+6. [registerAs로 네임스페이스 설정](#6-registeras로-네임스페이스-설정)
+7. [환경 변수 유효성 검사](#7-환경-변수-유효성-검사)
 
 ### 2단계: 기본 예제
-8. [.env + ConfigModule 기본 사용](#env--configmodule-기본-사용)
-9. [ConfigService.get() 예제](#configserviceget-예제)
-10. [registerAs 네임스페이스 예제](#registeras-네임스페이스-예제)
+8. [.env + ConfigModule 기본 사용](#8-env--configmodule-기본-사용)
+9. [ConfigService.get() 예제](#9-configserviceget-예제)
+10. [registerAs 네임스페이스 예제](#10-registeras-네임스페이스-예제)
 
 ### 3단계: 블로그 API 적용
-11. [@nestjs/config 설치](#nestjsconfig-설치)
-12. [.env 파일 생성](#env-파일-생성)
-13. [.env.example 작성과 .gitignore 설정](#envexample-작성과-gitignore-설정)
-14. [네임스페이스 설정 파일 분리](#네임스페이스-설정-파일-분리)
-15. [TypeORM 설정을 ConfigService로 교체](#typeorm-설정을-configservice로-교체)
-16. [Joi로 환경 변수 유효성 검사](#joi로-환경-변수-유효성-검사)
-17. [main.ts에서 ConfigService 활용](#maints에서-configservice-활용)
-18. [최종 AppModule 통합](#최종-appmodule-통합)
-19. [프로젝트 구조](#프로젝트-구조)
-20. [환경별 설정 파일 분리 전략](#환경별-설정-파일-분리-전략)
-21. [민감 정보 관리 팁](#민감-정보-관리-팁)
+11. [@nestjs/config 설치](#11-nestjsconfig-설치)
+12. [.env 파일 생성](#12-env-파일-생성)
+13. [.env.example 작성과 .gitignore 설정](#13-envexample-작성과-gitignore-설정)
+14. [네임스페이스 설정 파일 분리](#14-네임스페이스-설정-파일-분리)
+15. [TypeORM 설정을 ConfigService로 교체](#15-typeorm-설정을-configservice로-교체)
+16. [Joi로 환경 변수 유효성 검사](#16-joi로-환경-변수-유효성-검사)
+17. [main.ts에서 ConfigService 활용](#17-maints에서-configservice-활용)
+18. [최종 AppModule 통합](#18-최종-appmodule-통합)
+19. [환경별 설정 파일 분리 전략](#19-환경별-설정-파일-분리-전략)
+20. [민감 정보 관리 팁](#20-민감-정보-관리-팁)
+21. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
 22. [정리](#정리)
@@ -44,7 +44,7 @@
 
 ---
 
-## 왜 환경 변수가 필요한가?
+## 1. 왜 환경 변수가 필요한가?
 
 챕터 10에서 TypeORM을 설정할 때, 다음과 같이 데이터베이스 접속 정보를 코드에 직접 작성했다.
 
@@ -91,7 +91,7 @@ const dbPath = process.env.DATABASE_PATH; // './blog.sqlite'
 
 ---
 
-## @nestjs/config 패키지
+## 2. @nestjs/config 패키지
 
 `@nestjs/config`는 NestJS 공식 설정 관리 패키지다. 내부적으로 [dotenv](https://github.com/motdotla/dotenv) 라이브러리를 사용하여 `.env` 파일을 읽고, `ConfigService`를 통해 환경 변수에 안전하게 접근할 수 있게 해준다.
 
@@ -105,7 +105,7 @@ const dbPath = process.env.DATABASE_PATH; // './blog.sqlite'
 
 ---
 
-## .env 파일
+## 3. .env 파일
 
 `.env` 파일은 프로젝트 루트에 위치하며, `KEY=VALUE` 형식으로 환경 변수를 정의한다.
 
@@ -134,7 +134,7 @@ JWT_ACCESS_EXPIRATION=1h
 
 ---
 
-## ConfigModule.forRoot() 옵션
+## 4. ConfigModule.forRoot() 옵션
 
 `ConfigModule.forRoot()`는 `.env` 파일을 읽어 애플리케이션 전체에서 환경 변수를 사용할 수 있게 해준다.
 
@@ -171,7 +171,7 @@ export class AppModule {}
 
 ---
 
-## ConfigService 사용법
+## 5. ConfigService 사용법
 
 `ConfigService`는 환경 변수를 읽어오는 서비스다. DI를 통해 생성자에서 주입받아 사용한다.
 
@@ -207,7 +207,7 @@ export class SomeService {
 
 ---
 
-## registerAs로 네임스페이스 설정
+## 6. registerAs로 네임스페이스 설정
 
 환경 변수가 많아지면 관련된 설정끼리 **네임스페이스(namespace)**로 묶는 것이 좋다. `registerAs()` 함수가 바로 이 역할을 한다.
 
@@ -257,7 +257,7 @@ export class SomeService {
 
 ---
 
-## 환경 변수 유효성 검사
+## 7. 환경 변수 유효성 검사
 
 애플리케이션이 시작될 때 필수 환경 변수가 빠져 있으면, 런타임에 예상치 못한 에러가 발생한다. **시작 시점에 바로 실패**하는 것이 훨씬 안전하다.
 
@@ -299,7 +299,7 @@ Error: Config validation error: "DATABASE_PATH" is required
 
 ---
 
-## .env + ConfigModule 기본 사용
+## 8. .env + ConfigModule 기본 사용
 
 ```bash
 # .env (프로젝트 루트에 생성)
@@ -327,7 +327,7 @@ export class AppModule {}
 
 ---
 
-## ConfigService.get() 예제
+## 9. ConfigService.get() 예제
 
 ```typescript
 // src/app.controller.ts
@@ -368,7 +368,7 @@ export class AppController {
 
 ---
 
-## registerAs 네임스페이스 예제
+## 10. registerAs 네임스페이스 예제
 
 환경 변수를 용도별로 그룹화하는 예제다.
 
@@ -455,28 +455,7 @@ export class AppController {
 
 ---
 
-## 프로젝트 구조
-
-```
-프로젝트 루트/
-├── .env                         ← [이번 챕터 추가]
-├── .env.example                 ← [이번 챕터 추가]
-└── src/
-    ├── app.module.ts            ← ConfigModule 통합
-    ├── main.ts                  ← ConfigService로 포트 설정
-    ├── common/
-    ├── config/
-    │   ├── database.config.ts   ← [이번 챕터 추가]
-    │   ├── jwt.config.ts        ← [이번 챕터 추가]
-    │   └── env.validation.ts    ← [이번 챕터 추가]
-    ├── users/
-    ├── posts/
-    └── comments/
-```
-
----
-
-## @nestjs/config 설치
+## 11. @nestjs/config 설치
 
 ```bash
 # @nestjs/config 설치 (내부적으로 dotenv를 사용한다)
@@ -488,7 +467,7 @@ npm install joi
 
 ---
 
-## .env 파일 생성
+## 12. .env 파일 생성
 
 프로젝트 루트에 `.env` 파일을 만든다.
 
@@ -509,7 +488,7 @@ JWT_ACCESS_EXPIRATION=1h
 
 ---
 
-## .env.example 작성과 .gitignore 설정
+## 13. .env.example 작성과 .gitignore 설정
 
 팀원이 어떤 환경 변수가 필요한지 알 수 있도록 `.env.example`을 만든다.
 
@@ -541,7 +520,7 @@ JWT_ACCESS_EXPIRATION=1h
 
 ---
 
-## 네임스페이스 설정 파일 분리
+## 14. 네임스페이스 설정 파일 분리
 
 환경 변수를 용도별로 그룹화하는 설정 파일을 만든다. `src/config/` 디렉토리를 생성한다.
 
@@ -581,7 +560,7 @@ export default registerAs('jwt', () => ({
 
 ---
 
-## TypeORM 설정을 ConfigService로 교체
+## 15. TypeORM 설정을 ConfigService로 교체
 
 챕터 10에서 하드코딩했던 TypeORM 설정을 `ConfigService`로 교체한다. 핵심은 `TypeOrmModule.forRoot()` 대신 `TypeOrmModule.forRootAsync()`를 사용하는 것이다.
 
@@ -641,7 +620,7 @@ TypeOrmModule.forRootAsync({
 
 ---
 
-## Joi로 환경 변수 유효성 검사
+## 16. Joi로 환경 변수 유효성 검사
 
 애플리케이션이 시작될 때 필수 환경 변수가 빠져 있으면 즉시 에러를 내도록 한다.
 
@@ -683,7 +662,7 @@ export const envValidationSchema = Joi.object({
 
 ---
 
-## main.ts에서 ConfigService 활용
+## 17. main.ts에서 ConfigService 활용
 
 `main.ts`에서도 환경 변수로 포트 번호를 설정할 수 있다. `main.ts`는 DI 컨테이너 바깥이므로 `app.get()`으로 서비스를 직접 가져와야 한다.
 
@@ -708,7 +687,7 @@ bootstrap();
 
 ---
 
-## 최종 AppModule 통합
+## 18. 최종 AppModule 통합
 
 모든 설정을 합친 최종 `AppModule`이다.
 
@@ -769,7 +748,7 @@ export class AppModule {}
 
 ---
 
-## 환경별 설정 파일 분리 전략
+## 19. 환경별 설정 파일 분리 전략
 
 실제 프로젝트에서는 개발(development), 운영(production), 테스트(test) 환경마다 설정값이 다르다. `.env` 파일을 환경별로 분리하면 이를 깔끔하게 관리할 수 있다.
 
@@ -848,7 +827,7 @@ JWT_ACCESS_EXPIRATION=1h
 
 ---
 
-## 민감 정보 관리 팁
+## 20. 민감 정보 관리 팁
 
 설정 관리에서 가장 중요한 원칙은 **민감한 정보를 코드에 하드코딩하지 않는 것**이다.
 
@@ -890,6 +869,27 @@ JWT_ACCESS_EXPIRATION=1h
 2. **시크릿 매니저 사용**: AWS Secrets Manager, GCP Secret Manager, HashiCorp Vault 같은 전용 서비스를 활용하면 비밀 값의 접근 권한을 세밀하게 제어하고, 값 변경 이력을 추적하며, 자동 교체(rotation)까지 지원한다.
 
 > **핵심 원칙**: 비밀 키나 비밀번호가 Git 히스토리에 한 번이라도 올라갔다면, 그 값은 이미 노출된 것으로 간주하고 즉시 교체해야 한다. `git revert`나 `git reset`으로 커밋을 되돌려도 원격 저장소 히스토리에서 완전히 삭제하기는 매우 어렵다.
+
+---
+
+## 프로젝트 구조
+
+```
+프로젝트 루트/
+├── .env                         ← [이번 챕터 추가]
+├── .env.example                 ← [이번 챕터 추가]
+└── src/
+    ├── app.module.ts            ← ConfigModule 통합
+    ├── main.ts                  ← ConfigService로 포트 설정
+    ├── common/
+    ├── config/
+    │   ├── database.config.ts   ← [이번 챕터 추가]
+    │   ├── jwt.config.ts        ← [이번 챕터 추가]
+    │   └── env.validation.ts    ← [이번 챕터 추가]
+    ├── users/
+    ├── posts/
+    └── comments/
+```
 
 ---
 

@@ -19,10 +19,11 @@
 7. [블로그 API 적용: 인증과 권한 시스템 구축](#7-블로그-api-적용-인증과-권한-시스템-구축)
 8. [여러 Guard 동시 적용 시 실행 순서](#8-여러-guard-동시-적용-시-실행-순서)
 9. [비동기 Guard](#9-비동기-guard)
+10. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
-10. [정리](#정리)
-11. [다음 챕터 예고](#다음-챕터-예고)
+11. [정리](#정리)
+12. [다음 챕터 예고](#다음-챕터-예고)
 
 ---
 
@@ -601,33 +602,6 @@ export class CatsController {
 
 ---
 
-## 프로젝트 구조
-
-```
-src/
-├── app.module.ts                    ← APP_GUARD 등록
-├── common/
-│   ├── common.module.ts
-│   ├── common.service.ts
-│   ├── middleware/
-│   ├── dto/
-│   ├── data/
-│   │   └── users.data.ts            ← [이번 챕터 추가]
-│   ├── enums/
-│   │   └── role.enum.ts             ← [이번 챕터 추가]
-│   ├── decorators/
-│   │   ├── public.decorator.ts      ← [이번 챕터 추가]
-│   │   └── roles.decorator.ts       ← [이번 챕터 추가]
-│   └── guards/
-│       ├── simple-auth.guard.ts     ← [이번 챕터 추가]
-│       └── roles.guard.ts           ← [이번 챕터 추가]
-├── users/
-├── posts/
-└── comments/
-```
-
----
-
 ## 7. 블로그 API 적용: 인증과 권한 시스템 구축
 
 이전 챕터까지 구축한 블로그 API에 Guard를 적용하여 인증과 권한 시스템을 추가한다.
@@ -1189,6 +1163,33 @@ export class DbPermissionGuard implements CanActivate {
 ```
 
 > **언제 쓰는가?** JWT 토큰에는 발급 당시의 역할(role)이 저장된다. 만약 관리자가 특정 유저의 권한을 박탈했어도 토큰이 만료되기 전까지는 그 권한으로 요청할 수 있다. DB를 직접 조회하는 Guard를 사용하면 이런 문제를 방지할 수 있다. 단, 매 요청마다 DB 쿼리가 발생하므로 성능에 주의하자.
+
+---
+
+## 프로젝트 구조
+
+```
+src/
+├── app.module.ts                    ← APP_GUARD 등록
+├── common/
+│   ├── common.module.ts
+│   ├── common.service.ts
+│   ├── middleware/
+│   ├── dto/
+│   ├── data/
+│   │   └── users.data.ts            ← [이번 챕터 추가]
+│   ├── enums/
+│   │   └── role.enum.ts             ← [이번 챕터 추가]
+│   ├── decorators/
+│   │   ├── public.decorator.ts      ← [이번 챕터 추가]
+│   │   └── roles.decorator.ts       ← [이번 챕터 추가]
+│   └── guards/
+│       ├── simple-auth.guard.ts     ← [이번 챕터 추가]
+│       └── roles.guard.ts           ← [이번 챕터 추가]
+├── users/
+├── posts/
+└── comments/
+```
 
 ---
 

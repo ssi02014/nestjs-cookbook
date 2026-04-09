@@ -24,10 +24,11 @@
 13. [페이지네이션 구현](#13-페이지네이션-구현)
 14. [PostgreSQL/MySQL 전환 방법](#14-postgresqlmysql-전환-방법)
 15. [N+1 문제와 해결법](#15-n1-문제와-해결법)
+16. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
-16. [정리](#정리)
-17. [다음 챕터 예고](#다음-챕터-예고)
+17. [정리](#정리)
+18. [다음 챕터 예고](#다음-챕터-예고)
 
 ---
 
@@ -1123,26 +1124,6 @@ async createWithOwner(createCatDto: CreateCatDto, ownerId: number): Promise<Cat>
 
 ```bash
 npm install @nestjs/typeorm typeorm better-sqlite3
-```
-
-### 프로젝트 구조
-
-```
-src/
-├── app.module.ts                  ← TypeOrmModule 설정 추가
-├── common/
-├── users/
-│   ├── entities/
-│   │   └── user.entity.ts         ← [이번 챕터 추가]
-│   └── users.service.ts           ← Repository로 리팩토링
-├── posts/
-│   ├── entities/
-│   │   └── post.entity.ts         ← [이번 챕터 추가]
-│   └── posts.service.ts           ← Repository로 리팩토링
-└── comments/
-    ├── entities/
-    │   └── comment.entity.ts      ← [이번 챕터 추가]
-    └── comments.service.ts        ← Repository로 리팩토링
 ```
 
 ### Entity 관계도
@@ -2350,6 +2331,28 @@ const author = await post.author; // 이 시점에 SELECT 쿼리 실행
 
 > **실무 권장: Eager Loading은 신중하게 사용하자**
 > `eager: true`를 남발하면, 간단한 목록 조회에도 불필요한 JOIN이 발생해 오히려 성능이 나빠질 수 있다. 대부분의 경우 **필요할 때만 `relations` 옵션이나 `leftJoinAndSelect`로 명시적으로 로드**하는 방식이 더 예측 가능하고 관리하기 쉽다.
+
+---
+
+## 프로젝트 구조
+
+```
+src/
+├── app.module.ts                  ← TypeOrmModule 설정 추가
+├── common/
+├── users/
+│   ├── entities/
+│   │   └── user.entity.ts         ← [이번 챕터 추가]
+│   └── users.service.ts           ← Repository로 리팩토링
+├── posts/
+│   ├── entities/
+│   │   └── post.entity.ts         ← [이번 챕터 추가]
+│   └── posts.service.ts           ← Repository로 리팩토링
+└── comments/
+    ├── entities/
+    │   └── comment.entity.ts      ← [이번 챕터 추가]
+    └── comments.service.ts        ← Repository로 리팩토링
+```
 
 ---
 

@@ -23,7 +23,7 @@
 11. [@Public() 데코레이터 리팩토링](#public-데코레이터-리팩토링)
 12. [Controller에 @CurrentUser() 적용하여 코드 간결화](#controller에-currentuser-적용하여-코드-간결화)
 13. [리팩토링 전후 비교](#리팩토링-전후-비교)
-14. [최종 프로젝트 구조](#최종-프로젝트-구조)
+14. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
 15. [정리](#정리)
@@ -451,27 +451,6 @@ export class ExampleController {
 
 ---
 
-## 프로젝트 구조
-
-```
-src/
-├── common/
-│   ├── decorators/
-│   │   ├── current-user.decorator.ts ← [이번 챕터 추가]
-│   │   ├── public.decorator.ts
-│   │   └── roles.decorator.ts
-│   └── guards/
-│       └── simple-auth.guard.ts      ← @CurrentUser 연동으로 수정
-├── users/
-│   └── users.controller.ts           ← @CurrentUser() 적용
-├── posts/
-│   └── posts.controller.ts           ← @CurrentUser(), @Public() 적용
-└── comments/
-    └── comments.controller.ts        ← @CurrentUser(), @Public() 적용
-```
-
----
-
 ### @CurrentUser() 데코레이터 만들기
 
 `request.user`에 저장된 유저 정보를 편리하게 추출하는 파라미터 데코레이터다.
@@ -836,6 +815,27 @@ export class PostsController {
 | 코드 중복 | 매 메서드마다 `req.user.id` 추출 | 데코레이터 한 줄로 해결 |
 | Express 의존성 | [`@Req() req: Request`](references/decorators.md#req-res) - Express에 종속 | Express 타입 불필요 |
 | 가독성 | 메서드 본문에 데이터 추출 로직 섞임 | 파라미터 선언에서 명확히 표현 |
+
+---
+
+## 프로젝트 구조
+
+```
+src/
+├── common/
+│   ├── decorators/
+│   │   ├── current-user.decorator.ts ← [이번 챕터 추가]
+│   │   ├── public.decorator.ts
+│   │   └── roles.decorator.ts
+│   └── guards/
+│       └── simple-auth.guard.ts      ← @CurrentUser 연동으로 수정
+├── users/
+│   └── users.controller.ts           ← @CurrentUser() 적용
+├── posts/
+│   └── posts.controller.ts           ← @CurrentUser(), @Public() 적용
+└── comments/
+    └── comments.controller.ts        ← @CurrentUser(), @Public() 적용
+```
 
 ---
 

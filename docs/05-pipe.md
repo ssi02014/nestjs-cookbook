@@ -21,10 +21,11 @@
 
 ### 3단계: 블로그 API 적용
 11. [블로그 API에 Pipe 적용하기](#11-블로그-api에-pipe-적용하기)
+12. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
-12. [정리](#정리)
-13. [다음 챕터 예고](#다음-챕터-예고)
+13. [정리](#정리)
+14. [다음 챕터 예고](#다음-챕터-예고)
 
 ---
 
@@ -886,25 +887,6 @@ create(@Body() createPostDto: CreatePostDto) {
 
 ---
 
-## 프로젝트 구조
-
-```
-src/
-├── app.module.ts
-├── main.ts                              ← ValidationPipe 글로벌 설정
-├── common/
-│   ├── common.module.ts
-│   ├── common.service.ts
-│   ├── middleware/
-│   └── dto/
-│       └── pagination-query.dto.ts      ← [이번 챕터 추가]
-├── users/
-├── posts/
-└── comments/
-```
-
----
-
 ## 11. 블로그 API에 Pipe 적용하기
 
 이전 챕터에서 만든 블로그 API(Users, Posts, Comments)에 DTO 유효성 검사를 추가한다. 이 단계를 마치면 **잘못된 데이터가 들어오면 자동으로 에러가 반환**된다.
@@ -1368,6 +1350,25 @@ src/
     ├── comments.service.ts
     └── dto/
         └── create-comment.dto.ts    ← content 검증
+```
+
+---
+
+## 프로젝트 구조
+
+```
+src/
+├── app.module.ts
+├── main.ts                              ← ValidationPipe 글로벌 설정
+├── common/
+│   ├── common.module.ts
+│   ├── common.service.ts
+│   ├── middleware/
+│   └── dto/
+│       └── pagination-query.dto.ts      ← [이번 챕터 추가]
+├── users/
+├── posts/
+└── comments/
 ```
 
 ---

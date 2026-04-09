@@ -23,10 +23,11 @@
 11. [블로그 API에 적용하기](#11-블로그-api에-적용하기)
 12. [CORS 설정](#12-cors-설정)
 13. [에러 발생 시 미들웨어 동작](#13-에러-발생-시-미들웨어-동작)
+14. [프로젝트 구조](#프로젝트-구조)
 
 ### 4단계: 정리
-14. [정리](#정리)
-15. [다음 챕터 예고](#다음-챕터-예고)
+15. [정리](#정리)
+16. [다음 챕터 예고](#다음-챕터-예고)
 
 ---
 
@@ -644,23 +645,6 @@ export class AppModule implements NestModule {
 
 ---
 
-## 프로젝트 구조
-
-```
-src/
-├── app.module.ts              ← NestModule 구현, LoggerMiddleware 적용
-├── common/
-│   ├── common.module.ts
-│   ├── common.service.ts
-│   └── middleware/
-│       └── logger.middleware.ts   ← [이번 챕터 추가]
-├── users/
-├── posts/
-└── comments/
-```
-
----
-
 ## 11. 블로그 API에 적용하기
 
 이제 챕터 3에서 만든 블로그 API에 **LoggerMiddleware**를 추가한다. 모든 요청의 HTTP 메서드, URL, 응답 시간을 로깅하는 미들웨어를 만들어보자.
@@ -901,6 +885,23 @@ export class AuthCheckMiddleware implements NestMiddleware {
 ```
 
 > **팁:** `next(err)` 방식과 `throw` 방식 모두 Exception Filter로 전달된다. NestJS 스타일에 맞추려면 `HttpException` 계열의 예외를 `throw`하는 것이 더 권장된다. 두 방식 모두 `next()`를 직접 호출하지 않으므로 요청이 라우트 핸들러로 넘어가지 않는다.
+
+---
+
+## 프로젝트 구조
+
+```
+src/
+├── app.module.ts              ← NestModule 구현, LoggerMiddleware 적용
+├── common/
+│   ├── common.module.ts
+│   ├── common.service.ts
+│   └── middleware/
+│       └── logger.middleware.ts   ← [이번 챕터 추가]
+├── users/
+├── posts/
+└── comments/
+```
 
 ---
 
